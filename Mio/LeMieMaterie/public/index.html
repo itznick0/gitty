@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Le Mie Materie</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <div>
+        <div class="title" id="pageTitle">Le Mie Materie</div>
+        <div class="subtitle"><span class="dot"></span> <span id="spaceName">Spazio personale</span></div>
+      </div>
+      <div class="spacer"></div>
+      <button class="icon-btn" title="Impostazioni" id="btnSettings">
+        ⚙
+      </button>
+      <button class="icon-btn pencil-toggle" title="Modalità gestione" id="btnManage">✏️</button>
+    </div>
+  </header>
+
+  <main>
+    <nav class="crumbs" id="breadcrumbs"></nav>
+
+    <section id="listsView">
+      <div class="list" id="listContainer"></div>
+    </section>
+
+    <section class="editor-wrap" id="editorView">
+      <div class="toolbar">
+        <button id="tbBold"><b>B</b></button>
+        <select id="tbSize">
+          <option value="p">Normale</option>
+          <option value="h1">Titolo 1</option>
+          <option value="h2">Titolo 2</option>
+        </select>
+        <input type="color" id="tbColor">
+        <input type="file" id="tbImg" accept="image/*">
+        <button id="tbUndo">↶</button>
+        <button id="tbRedo">↷</button>
+        <button id="tbSave">💾 Salva</button>
+      </div>
+      <div id="fileMeta"></div>
+      <div id="editor" contenteditable="true"></div>
+    </section>
+  </main>
+
+  <button class="fab" id="fab">+</button>
+
+  <div class="modal-wrap" id="modalWrap">
+    <div class="modal">
+      <h3 id="modalTitle"></h3>
+      <input id="modalName" type="text" placeholder="Nome..."/>
+      <div class="colors" id="colorChoices"></div>
+      <div class="actions">
+        <button id="btnCancel">Annulla</button>
+        <button id="btnConfirm">Conferma</button>
+      </div>
+    </div>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>

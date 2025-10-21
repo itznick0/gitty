@@ -1,0 +1,5 @@
+COMUNICAZIONE PER LA CLASSE {CLASSE}
+===================================
+{ELENCO_STUDENTI}
+===================================
+TOTALE DA PAGARE: Euro {TOTALE}

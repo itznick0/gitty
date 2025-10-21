@@ -1,0 +1,14 @@
+posizione= 0
+posizione= 24
+posizione= 36
+posizione= 65
+posizione= 132
+posizione= 139
+posizione= 146
+posizione= 152
+posizione= 160
+posizione= 169
+posizione= 174
+posizione= 178
+posizione= 183
+posizione= 187

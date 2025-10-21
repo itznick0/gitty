@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lezioni - CodeTogether</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="assets/logo.svg" alt="CodeTogether Logo" />
+      <span>CodeTogether</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="lezioni.html">Lezioni</a></li>
+        <li><a href="chi-siamo.html">Chi Siamo</a></li>
+        <li><a href="live.html">Live</a></li>
+      </ul>
+    </nav>
+    <a href="lezioni.html" class="btn-primary">Lezioni</a>
+  </header>
+
+  <main class="lessons-grid">
+    <!-- Lezione 1 -->
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <h3>lezione 1.</h3>
+        <p>Pubblicato il 01/06/2024</p>
+      </div>
+      <img src="https://via.placeholder.com/300x200?text=Lezione+1" alt="Lezione 1" />
+      <h2>Titolo lezione 4</h2>
+      <p>Descrizione sintetica della lezione 4.</p>
+    </div>
+
+    <!-- Lezione 2 -->
+    <div class="lesson-card">
+      <div class="lesson-header">
+        <h3>lezione 2.</h3>
+        <p>Pubblicato il 04/06/2024</p>
+      </div>
+      <img src="https://via.placeholder.com/300x200?text=Lezione+2" alt="Lezione 2" />
+      <h2>Titolo lezione 5</h2>
+      <p>Descrizione sintetica della lezione 5.</p>
+    </div>
+
+    <!-- Lezione 3 (bloccata) -->
+    <div class="lesson-card locked">
+      <div class="lock-icon">
+        <img src="assets/lock.svg" alt="Bloccato" />
+      </div>
+      <img src="https://via.placeholder.com/300x200?text=Lezione+3" alt="Lezione 3" />
+      <h2>Titolo lezione 6</h2>
+      <p>Descrizione sintetica della lezione 6.</p>
+      <div class="lesson-actions">
+        <button class="btn-action"><img src="assets/edit.svg" alt="Modifica" /> Modifica</button>
+        <button class="btn-action"><img src="assets/stats.svg" alt="Statistiche" /> Statistiche</button>
+        <button class="btn-action more">...</button>
+      </div>
+    </div>
+
+    <!-- Puoi aggiungere altre lezioni qui -->
+
+  </main>
+
+  <footer>
+    <p>&copy; 2024 CodeTogether. Tutti i diritti riservati.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

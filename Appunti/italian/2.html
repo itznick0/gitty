@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Documento Personalizzato</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+      color: #2c3e50;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 30px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      padding: 50px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #1a202c;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .date, .subject {
+      font-size: 1.1rem;
+      color: #4a5568;
+      background: #f0f4f8;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    /* Stili per i paragrafi personalizzati */
+    .content p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    /* Classi di stile */
+    .grassetto { font-weight: bold !important; }
+    .corsivo { font-style: italic !important; }
+    .sottolineato { text-decoration: underline !important; }
+    .barrato { text-decoration: line-through !important; }
+    .evidenziato { background-color: #fff9c4; padding: 2px 4px; border-radius: 3px; }
+    .grande { font-size: 1.4rem !important; line-height: 1.6; }
+    .piccolo { font-size: 0.9rem !important; line-height: 1.6; }
+
+    /* Sezione immagini */
+    .images-section {
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid #edf2f7;
+    }
+
+    .images-section h2 {
+      font-size: 1.4rem;
+      color: #2d3748;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .images-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .images-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    h1::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(to right, #4f6df5, #7a5ef8);
+      margin: 16px auto 0;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 30px 20px; }
+      h1 { font-size: 2.2rem; }
+      .meta { flex-direction: column; gap: 10px; }
+      .images-container { flex-direction: column; align-items: center; }
+    }
+
+  /* 🔥 TITOLO APPARISCENTE */
+  #titoloparagrafo {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin: 30px 0 24px 0;
+    color: #0d3b66;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    letter-spacing: 0.5px;
+    position: relative;
+  }
+
+  /* Decorazione sotto il titolo */
+  #titoloparagrafo::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, #4a6fa5, #6b8cbc);
+    margin: 14px auto 0;
+    border-radius: 2px;
+  }
+
+  /* Responsive: su mobile il titolo si adatta */
+  @media (max-width: 600px) {
+    #titoloparagrafo {
+      font-size: 1.5rem;
+      margin: 24px 0 20px 0;
+    }
+  }
+
+    #allinea p {
+        text-align: center;
+        margin: 8px 0;
+    }
+
+      /* Stile per la sezione immagine + didascalia */
+  #immaginedidascalia {
+    max-width: 600px;
+    margin: 30px auto;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    background: #f0f0f0; /* colore di fallback */
+    padding: 20px;
+    text-align: center;
+  }
+
+  #immaginedidascalia img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  #immaginedidascalia .didascalia {
+    font-size: 1.05rem;
+    color: #2d3748;
+    margin: 0;
+    line-height: 1.5;
+  }
+  #pdf-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 14px 28px;
+      background: linear-gradient(to right, #1976d2, #42a5f5);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(25, 118, 210, 0.3);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    #pdf-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(25, 118, 210, 0.4);
+    }
+
+    /* Nascondi il bottone in stampa */
+    @media print {
+      #pdf-button {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+    <button id="pdf-button" onclick="window.print()">📄 Scarica come PDF</button>
+  <div class="container">
+    <div class="header">
+      <h1>Ludovico Ariosto</h1>
+      <div class="meta">
+        <p class="date">21 Ottobre 2025</p>
+        <p class="subject">Materia: Letteratura</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- class: grassetto, corsivo, sottolineato,titoloparagrafo, grande, piccolo, evidenziato, barrato, misto senza spazi -->
+       <p id="titoloparagrafo">Andelica in fuga</p>
+       <p class="piccolo sottolineato corsivo">Dall'Orlando Furioso I: 8-17, 31-38, 49-59</p>
+       <div id="allinea">
+<p>	</p>
+<p>5</p>
+<p>Orlando, che gran tempo innamorato</p>
+<p>fu de la bella Angelica, e per lei</p>
+<p>in India, in Media, in Tartaria lasciato</p>
+<p>avea infiniti ed immortal trofei,</p>
+<p>in Ponente con essa era tornato,</p>
+<p>dove sotto i gran monti Pirenei</p>
+<p>con la gente di Francia e de Lamagna</p>
+<p>re Carlo era attendato alla campagna,</p>
+<p></p>
+<p>6</p>
+<p>per far al re Marsilio e al re Agramante</p>
+<p>battersi ancor del folle ardir la guancia,</p>
+<p>d’aver condotto, l’un, d’Africa quante</p>
+<p>genti erano atte a portar spada e lancia;</p>
+<p>l’altro, d’aver spinta la Spagna inante</p>
+<p>a destruzion del bel regno di Francia.</p>
+<p>E così Orlando arrivò quivi a punto:</p>
+<p>ma tosto si pentì d’esservi giunto;</p>
+<p></p>
+<p>7</p>
+<p>che vi fu tolta la sua donna poi:</p>
+<p>ecco il giudicio uman come spesso erra!</p>
+<p>Quella che dagli esperi ai liti eoi</p>
+<p>avea difesa con sì lunga guerra,</p>
+<p>or tolta gli è fra tanti amici suoi,</p>
+<p>senza spada adoprar, ne la sua terra.</p>
+<p>Il savio imperator, ch’estinguer volse</p>
+<p>un grave incendio, fu che gli la tolse.</p>
+<p></p>
+<p>8</p>
+<p>Nata pochi dì inanzi era una gara</p>
+<p>tra il conte Orlando e il suo cugin Rinaldo,</p>
+<p>che entrambi avean per la bellezza rara</p>
+<p>d’amoroso disio l’animo caldo.</p>
+<p>Carlo, che non avea tal lite cara,</p>
+<p>che gli rendea l’aiuto lor men saldo,</p>
+<p>questa donzella, che la causa n’era,</p>
+<p>tolse, e diè in mano al duca di Bavera;</p>
+<p></p>
+<p>9</p>
+<p>in premio promettendola a quel d’essi,</p>
+<p>ch’in quel conflitto, in quella gran giornata,</p>
+<p>degl’infideli più copia uccidessi,</p>
+<p>e di sua man prestasse opra più grata.</p>
+<p>Contrari ai voti poi furo i successi;</p>
+<p>ch’in fuga andò la gente battezzata,</p>
+<p>e con molti altri fu ‘l duca prigione,</p>
+<p>e restò abbandonato il padiglione.</p>
+<p></p>
+<p>10</p>
+<p>Dove, poi che rimase la donzella</p>
+<p>ch’esser dovea del vincitor mercede,</p>
+<p>inanzi al caso era salita in sella,</p>
+<p>e quando bisognò le spalle diede,</p>
+<p>presaga che quel giorno esser rubella</p>
+<p>dovea Fortuna alla cristiana fede:</p>
+<p>entrò in un bosco, e ne la stretta via</p>
+<p>rincontrò un cavallier ch’a piè venìa.</p>
+<p></p>
+<p>11</p>
+<p>Indosso la corazza, l’elmo in testa,</p>
+<p>la spada al fianco, e in braccio avea lo scudo;</p>
+<p>e più leggier correa per la foresta,</p>
+<p>ch’al pallio rosso il villan mezzo ignudo.</p>
+<p>Timida pastorella mai sì presta</p>
+<p>non volse piede inanzi a serpe crudo,</p>
+<p>come Angelica tosto il freno torse,</p>
+<p>che del guerrier, ch’a piè venìa, s’accorse.</p>
+<p></p>
+<p>12</p>
+<p>Era costui quel paladin gagliardo,</p>
+<p>figliuol d’Amon, signor di Montalbano,</p>
+<p>a cui pur dianzi il suo destrier Baiardo</p>
+<p>per strano caso uscito era di mano.</p>
+<p>Come alla donna egli drizzò lo sguardo,</p>
+<p>riconobbe, quantunque di lontano,</p>
+<p>l’angelico sembiante e quel bel volto</p>
+<p>ch’all’amorose reti il tenea involto.</p>
+<p></p>
+<p>13</p>
+<p>La donna il palafreno a dietro volta,</p>
+<p>e per la selva a tutta briglia il caccia;</p>
+<p>né per la rara più che per la folta,</p>
+<p>la più sicura e miglior via procaccia:</p>
+<p>ma pallida, tremando, e di sé tolta,</p>
+<p>lascia cura al destrier che la via faccia.</p>
+<p>Di sù di giù, ne l’alta selva fiera</p>
+<p>tanto girò, che venne a una riviera.</p>
+<p></p>
+<p>14</p>
+<p>Su la riviera Ferraù trovosse</p>
+<p>di sudor pieno e tutto polveroso.</p>
+<p>Da la battaglia dianzi lo rimosse</p>
+<p>un gran disio di bere e di riposo;</p>
+<p>e poi, mal grado suo, quivi fermosse,</p>
+<p>perché, de l’acqua ingordo e frettoloso,</p>
+<p>l’elmo nel fiume si lasciò cadere,</p>
+<p>né l’avea potuto anco riavere.</p>
+<p></p>
+<p>15</p>
+<p>Quanto potea più forte, ne veniva</p>
+<p>gridando la donzella ispaventata.</p>
+<p>A quella voce salta in su la riva</p>
+<p>il Saracino, e nel viso la guata;</p>
+<p>e la conosce subito ch’arriva,</p>
+<p>ben che di timor pallida e turbata,</p>
+<p>e sien più dì che non n’udì novella,</p>
+<p>che senza dubbio ell’è Angelica bella.</p>
+<p></p>
+<p>16</p>
+<p>E perché era cortese, e n’avea forse</p>
+<p>non men de’ dui cugini il petto caldo,</p>
+<p>l’aiuto che potea tutto le porse,</p>
+<p>pur come avesse l’elmo, ardito e baldo:</p>
+<p>trasse la spada, e minacciando corse</p>
+<p>dove poco di lui temea Rinaldo.</p>
+<p>Più volte s’eran già non pur veduti,</p>
+<p>m’al paragon de l’arme conosciuti.</p>
+<p></p>
+<p>17</p>
+<p>Cominciar quivi una crudel battaglia,</p>
+<p>come a piè si trovar, coi brandi ignudi:</p>
+<p>non che le piastre e la minuta maglia,</p>
+<p>ma ai colpi lor non reggerian gl’incudi.</p>
+<p>Or, mentre l’un con l’altro si travaglia,</p>
+<p>bisogna al palafren che ‘l passo studi;</p>
+<p>che quanto può menar de le calcagna,</p>
+<p>colei lo caccia al bosco e alla campagna.</p>
+<p></p>
+<p>18</p>
+<p>Poi che s’affaticar gran pezzo invano</p>
+<p>i dui guerrier per por l’un l’altro sotto,</p>
+<p>quando non meno era con l’arme in mano</p>
+<p>questo di quel, né quel di questo dotto;</p>
+<p>fu primiero il signor di Montalbano,</p>
+<p>ch’al cavallier di Spagna fece motto,</p>
+<p>sì come quel ch’ha nel cuor tanto fuoco,</p>
+<p>che tutto n’arde e non ritrova loco.</p>
+<p></p>
+<p>19</p>
+<p>Disse al pagan: «Me sol creduto avrai,</p>
+<p>e pur avrai te meco ancora offeso:</p>
+<p>se questo avvien perché i fulgenti rai</p>
+<p>del nuovo sol t’abbino il petto acceso,</p>
+<p>di farmi qui tardar che guadagno hai?</p>
+<p>che quando ancor tu m’abbi morto o preso,</p>
+<p>non però tua la bella donna fia;</p>
+<p>che, mentre noi tardiam, se ne va via.</p>
+<p></p>
+<p>20</p>
+<p>Quanto fia meglio, amandola tu ancora,</p>
+<p>che tu le venga a traversar la strada,</p>
+<p>a ritenerla e farle far dimora,</p>
+<p>prima che più lontana se ne vada!</p>
+<p>Come l’avremo in potestate, allora</p>
+<p>di chi esser de’ si provi con la spada:</p>
+<p>non so altrimenti, dopo un lungo affanno,</p>
+<p>che possa riuscirci altro che danno.»</p>
+<p></p>
+<p>21</p>
+<p>Al pagan la proposta non dispiacque:</p>
+<p>così fu differita la tenzone;</p>
+<p>e tal tregua tra lor subito nacque,</p>
+<p>sì l’odio e l’ira va in oblivione,</p>
+<p>che ‘l pagano al partir da le fresche acque</p>
+<p>non lasciò a piedi il buon figliuol d’Amone:</p>
+<p>con preghi invita, ed al fin toglie in groppa,</p>
+<p>e per l’orme d’Angelica galoppa.</p>
+<p></p>
+<p>22</p>
+<p>Oh gran bontà de’ cavallieri antiqui!</p>
+<p>Eran rivali, eran di fé diversi,</p>
+<p>e si sentian degli aspri colpi iniqui</p>
+<p>per tutta la persona anco dolersi;</p>
+<p>e pur per selve oscure e calli obliqui</p>
+<p>insieme van senza sospetto aversi.</p>
+<p>Da quattro sproni il destrier punto arriva</p>
+<p>ove una strada in due si dipartiva.</p>
+<p></p>
+<p>23</p>
+<p>E come quei che non sapean se l’una</p>
+<p>o l’altra via facesse la donzella</p>
+<p>(però che senza differenza alcuna</p>
+<p>apparia in amendue l’orma novella),</p>
+<p>si messero ad arbitrio di fortuna,</p>
+<p>Rinaldo a questa, il Saracino a quella.</p>
+<p>Pel bosco Ferraù molto s’avvolse,</p>
+<p>e ritrovossi al fine onde si tolse.</p>
+<p></p>
+<p>24</p>
+<p>Pur si ritrova ancor su la rivera,</p>
+<p>là dove l’elmo gli cascò ne l’onde.</p>
+<p>Poi che la donna ritrovar non spera,</p>
+<p>per aver l’elmo che ‘l fiume gli asconde,</p>
+<p>in quella parte onde caduto gli era</p>
+<p>discende ne l’estreme umide sponde:</p>
+<p>ma quello era sì fitto ne la sabbia,</p>
+<p>che molto avrà da far prima che l’abbia.</p>
+<p></p>
+<p>25</p>
+<p>Con un gran ramo d’albero rimondo,</p>
+<p>di ch’avea fatto una pertica lunga,</p>
+<p>tenta il fiume e ricerca sino al fondo,</p>
+<p>né loco lascia ove non batta e punga.</p>
+<p>Mentre con la maggior stizza del mondo</p>
+<p>tanto l’indugio suo quivi prolunga,</p>
+<p>vede di mezzo il fiume un cavalliero</p>
+<p>insino al petto uscir, d’aspetto fiero.</p>
+<p></p>
+<p>26</p>
+<p>Era, fuor che la testa, tutto armato,</p>
+<p>ed avea un elmo ne la destra mano:</p>
+<p>avea il medesimo elmo che cercato</p>
+<p>da Ferraù fu lungamente invano.</p>
+<p>A Ferraù parlò come adirato,</p>
+<p>e disse: «Ah mancator di fé, marano!</p>
+<p>perché di lasciar l’elmo anche t’aggrevi,</p>
+<p>che render già gran tempo mi dovevi?</p>
+<p></p>
+<p>27</p>
+<p>Ricordati, pagan, quando uccidesti</p>
+<p>d’Angelica il fratel (che son quell’io),</p>
+<p>dietro all’altr’arme tu mi promettesti</p>
+<p>gittar fra pochi dì l’elmo nel rio.</p>
+<p>Or se Fortuna (quel che non volesti</p>
+<p>far tu) pone ad effetto il voler mio,</p>
+<p>non ti turbare; e se turbar ti déi,</p>
+<p>turbati che di fé mancato sei.</p>
+<p></p>
+<p>28</p>
+<p>Ma se desir pur hai d’un elmo fino,</p>
+<p>trovane un altro, ed abbil con più onore;</p>
+<p>un tal ne porta Orlando paladino,</p>
+<p>un tal Rinaldo, e forse anco migliore:</p>
+<p>l’un fu d’Almonte, e l’altro di Mambrino:</p>
+<p>acquista un di quei dui col tuo valore;</p>
+<p>e questo, ch’hai già di lasciarmi detto,</p>
+<p>farai bene a lasciarmi con effetto.»</p>
+<p></p>
+<p>29</p>
+<p>All’apparir che fece all’improvviso</p>
+<p>de l’acqua l’ombra, ogni pelo arricciossi,</p>
+<p>e scolorossi al Saracino il viso;</p>
+<p>la voce, ch’era per uscir, fermossi.</p>
+<p>Udendo poi da l’Argalia, ch’ucciso</p>
+<p>quivi avea già (che l’Argalia nomossi)</p>
+<p>la rotta fede così improverarse,</p>
+<p>di scorno e d’ira dentro e di fuor arse.</p>
+<p></p>
+<p>30</p>
+<p>Né tempo avendo a pensar altra scusa,</p>
+<p>e conoscendo ben che ‘l ver gli disse,</p>
+<p>restò senza risposta a bocca chiusa;</p>
+<p>ma la vergogna il cor sì gli trafisse,</p>
+<p>che giurò per la vita di Lanfusa</p>
+<p>non voler mai ch’altro elmo lo coprisse,</p>
+<p>se non quel buono che già in Aspramonte</p>
+<p>trasse dal capo Orlando al fiero Almonte.</p>
+<p></p>
+<p>31</p>
+<p>E servò meglio questo giuramento,</p>
+<p>che non avea quell’altro fatto prima.</p>
+<p>Quindi si parte tanto malcontento,</p>
+<p>che molti giorni poi si rode e lima.</p>
+<p>Sol di cercare è il paladino intento</p>
+<p>di qua di là, dove trovarlo stima.</p>
+<p>Altra ventura al buon Rinaldo accade,</p>
+<p>che da costui tenea diverse strade.</p>
+<p></p>
+<p>32</p>
+<p>Non molto va Rinaldo, che si vede</p>
+<p>saltare inanzi il suo destrier feroce:</p>
+<p>«Ferma, Baiardo mio, deh, ferma il piede!</p>
+<p>che l’esser senza te troppo mi nuoce.»</p>
+<p>Per questo il destrier sordo, a lui non riede</p>
+<p>anzi più se ne va sempre veloce.</p>
+<p>Segue Rinaldo, e d’ira si distrugge:</p>
+<p>ma seguitiamo Angelica che fugge.</p></div>
+    </div>
+
+    <!-- Sezione immagini -->
+    <div class="images-section">
+      <h2>Immagini</h2>
+      <div class="images-container">
+        <!-- Aggiungi qui le tue immagini -->
+        <!-- <img src="immagine.jpg" alt="Descrizione"> -->
+         <div id="immaginedidascalia">
+        <img src="2/1.png" alt="Angelica in fuga" />
+        <p class="didascalia">Angelica in fuga attraverso la foresta, inseguita da Rinaldo e Ferraù.</p>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    console.log("Documento con stili personalizzati caricato!");
+
+    // Genera un colore pastello/morbido casuale (non fluo, non primari puri)
+  function generaColoreMorbido() {
+    // Usiamo una palette di tonalità tenui: grigi azzurri, verdi salvia, beige, lavanda, ecc.
+    const colori = [
+      "#e6f0fa", // azzurro chiaro
+      "#f0f7ee", // verde menta tenue
+      "#fdf6f0", // beige caldo
+      "#f8f4fa", // lavanda chiaro
+      "#f2f5f9", // grigio-blu
+      "#f9f7f2", // avorio
+      "#f0f4f8", // celeste polvere
+      "#f5f0f6", // lilla tenue
+      "#f1f8e9", // verde pallido
+      "#e8f5f2"  // turchese soft
+    ];
+    return colori[Math.floor(Math.random() * colori.length)];
+  }
+
+  // Applica il colore allo sfondo al caricamento
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("immaginedidascalia");
+    if (container) {
+      container.style.backgroundColor = generaColoreMorbido();
+    }
+  });
+
+  </script>
+</body>
+</html>

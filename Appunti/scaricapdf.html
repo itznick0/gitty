@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📚 Download as PDF</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body {
+      background: linear-gradient(135deg, #f5f7fa, #e3f2fd);
+      min-height: 100vh;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin: 20px 0 30px;
+      color: #1976d2;
+    }
+    .subjects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    .subject {
+      padding: 14px 24px;
+      background: white;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #0288d1;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      transition: all 0.2s;
+    }
+    .subject:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+      background: #e3f2fd;
+    }
+    .input-section {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+    }
+    input {
+      padding: 12px;
+      font-size: 1.1rem;
+      border: 2px solid #90caf9;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 180px;
+      text-align: center;
+      margin: 12px 0;
+    }
+    button {
+      background: linear-gradient(to right, #1976d2, #42a5f5);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover { opacity: 0.9; }
+    button:disabled {
+      background: #bdbdbd;
+      cursor: not-allowed;
+    }
+    #preview { margin-top: 10px; font-size: 0.95rem; color: #546e7a; }
+    #status { margin-top: 15px; min-height: 24px; color: #d32f2f; font-weight: 500; }
+  </style>
+</head>
+<body>
+  <h1>📥 Download Document as PDF</h1>
+
+  <div class="subjects" id="subjects"></div>
+
+  <div class="input-section" id="inputSection" style="display:none;">
+    <h2>Enter Document Number</h2>
+    <input type="number" id="docNumber" min="1" placeholder="e.g. 1" />
+    <br>
+    <button id="downloadBtn" onclick="downloadAsPDF()">Download PDF</button>
+    <div id="preview"></div>
+    <div id="status"></div>
+  </div>
+
+  <!-- Hidden iframe to load target page -->
+  <iframe id="loader" style="display:none;"></iframe>
+
+  <script>
+    const subjects = ["math", "physics", "history", "biology", "chemistry", "literature", "english", "italian", "gpoi", "sicurezza"];
+    let selectedSubject = null;
+
+    // Generate subject buttons
+    const container = document.getElementById("subjects");
+    subjects.forEach(subj => {
+      const btn = document.createElement("div");
+      btn.className = "subject";
+      btn.textContent = subj.charAt(0).toUpperCase() + subj.slice(1);
+      btn.onclick = () => selectSubject(subj);
+      container.appendChild(btn);
+    });
+
+    function selectSubject(subj) {
+      selectedSubject = subj;
+      document.getElementById("inputSection").style.display = "block";
+      document.getElementById("docNumber").value = "";
+      document.getElementById("preview").textContent = `Preview: ${subj}/[number].html`;
+      document.getElementById("status").textContent = "";
+    }
+
+    async function downloadAsPDF() {
+      const num = document.getElementById("docNumber").value.trim();
+      const status = document.getElementById("status");
+      const btn = document.getElementById("downloadBtn");
+      
+      if (!num || isNaN(num) || parseInt(num) <= 0) {
+        status.textContent = "Please enter a valid number.";
+        return;
+      }
+
+      if (!selectedSubject) return;
+
+      const filePath = `${selectedSubject}/${num}.html`;
+      const iframe = document.getElementById("loader");
+      btn.disabled = true;
+      status.textContent = "Loading page...";
+
+      try {
+        // Load target page into iframe
+        iframe.src = filePath;
+        
+        // Wait for iframe to load
+        await new Promise((resolve, reject) => {
+          iframe.onload = resolve;
+          iframe.onerror = () => reject(new Error("Failed to load page"));
+          setTimeout(reject, 5000); // 5s timeout
+        });
+
+        status.textContent = "Generating PDF...";
+        
+        // Capture iframe content
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        const content = iframeDoc.body;
+
+        if (!content || !content.innerHTML.trim()) {
+          throw new Error("Empty content");
+        }
+
+        // Use html2canvas to render content
+        const canvas = await html2canvas(content, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true
+        });
+
+        // Create PDF
+        const { jsPDF } = window.jspdf;
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        
+        // Download
+        pdf.save(`${selectedSubject}-${num}.pdf`);
+        status.textContent = "✅ PDF downloaded!";
+      } catch (err) {
+        console.error(err);
+        status.textContent = "❌ Error: " + (err.message || "Failed to generate PDF");
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

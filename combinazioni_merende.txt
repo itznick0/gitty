@@ -1,0 +1,58 @@
+📋 TUTTE LE COMBINAZIONI POSSIBILI MERENDA + BEVANDA
+============================================================
+
+1. MERENDA: Patatine (consistente) + BEVANDA: Succo di mela
+2. MERENDA: Patatine (consistente) + BEVANDA: Yogurt fragola
+3. MERENDA: Patatine (consistente) + BEVANDA: latte vaniglia
+4. MERENDA: Patatine (consistente) + BEVANDA: latte cioccolato
+5. MERENDA: Patatine (consistente) + BEVANDA: te
+6. MERENDA: 2x Waffer + BEVANDA: Succo di mela
+7. MERENDA: 2x Waffer + BEVANDA: Yogurt fragola
+8. MERENDA: 2x Waffer + BEVANDA: latte vaniglia
+9. MERENDA: 2x Waffer + BEVANDA: latte cioccolato
+10. MERENDA: 2x Waffer + BEVANDA: te
+11. MERENDA: Waffer + Biscotti multi gusto + BEVANDA: Succo di mela
+12. MERENDA: Waffer + Biscotti multi gusto + BEVANDA: Yogurt fragola
+13. MERENDA: Waffer + Biscotti multi gusto + BEVANDA: latte vaniglia
+14. MERENDA: Waffer + Biscotti multi gusto + BEVANDA: latte cioccolato
+15. MERENDA: Waffer + Biscotti multi gusto + BEVANDA: te
+16. MERENDA: Waffer + Cioccolatine + BEVANDA: Succo di mela
+17. MERENDA: Waffer + Cioccolatine + BEVANDA: Yogurt fragola
+18. MERENDA: Waffer + Cioccolatine + BEVANDA: latte vaniglia
+19. MERENDA: Waffer + Cioccolatine + BEVANDA: latte cioccolato
+20. MERENDA: Waffer + Cioccolatine + BEVANDA: te
+21. MERENDA: Waffer + pop corn + BEVANDA: Succo di mela
+22. MERENDA: Waffer + pop corn + BEVANDA: Yogurt fragola
+23. MERENDA: Waffer + pop corn + BEVANDA: latte vaniglia
+24. MERENDA: Waffer + pop corn + BEVANDA: latte cioccolato
+25. MERENDA: Waffer + pop corn + BEVANDA: te
+26. MERENDA: 2x Biscotti multi gusto + BEVANDA: Succo di mela
+27. MERENDA: 2x Biscotti multi gusto + BEVANDA: Yogurt fragola
+28. MERENDA: 2x Biscotti multi gusto + BEVANDA: latte vaniglia
+29. MERENDA: 2x Biscotti multi gusto + BEVANDA: latte cioccolato
+30. MERENDA: 2x Biscotti multi gusto + BEVANDA: te
+31. MERENDA: Biscotti multi gusto + Cioccolatine + BEVANDA: Succo di mela
+32. MERENDA: Biscotti multi gusto + Cioccolatine + BEVANDA: Yogurt fragola
+33. MERENDA: Biscotti multi gusto + Cioccolatine + BEVANDA: latte vaniglia
+34. MERENDA: Biscotti multi gusto + Cioccolatine + BEVANDA: latte cioccolato
+35. MERENDA: Biscotti multi gusto + Cioccolatine + BEVANDA: te
+36. MERENDA: Biscotti multi gusto + pop corn + BEVANDA: Succo di mela
+37. MERENDA: Biscotti multi gusto + pop corn + BEVANDA: Yogurt fragola
+38. MERENDA: Biscotti multi gusto + pop corn + BEVANDA: latte vaniglia
+39. MERENDA: Biscotti multi gusto + pop corn + BEVANDA: latte cioccolato
+40. MERENDA: Biscotti multi gusto + pop corn + BEVANDA: te
+41. MERENDA: 2x Cioccolatine + BEVANDA: Succo di mela
+42. MERENDA: 2x Cioccolatine + BEVANDA: Yogurt fragola
+43. MERENDA: 2x Cioccolatine + BEVANDA: latte vaniglia
+44. MERENDA: 2x Cioccolatine + BEVANDA: latte cioccolato
+45. MERENDA: 2x Cioccolatine + BEVANDA: te
+46. MERENDA: Cioccolatine + pop corn + BEVANDA: Succo di mela
+47. MERENDA: Cioccolatine + pop corn + BEVANDA: Yogurt fragola
+48. MERENDA: Cioccolatine + pop corn + BEVANDA: latte vaniglia
+49. MERENDA: Cioccolatine + pop corn + BEVANDA: latte cioccolato
+50. MERENDA: Cioccolatine + pop corn + BEVANDA: te
+51. MERENDA: 2x pop corn + BEVANDA: Succo di mela
+52. MERENDA: 2x pop corn + BEVANDA: Yogurt fragola
+53. MERENDA: 2x pop corn + BEVANDA: latte vaniglia
+54. MERENDA: 2x pop corn + BEVANDA: latte cioccolato
+55. MERENDA: 2x pop corn + BEVANDA: te

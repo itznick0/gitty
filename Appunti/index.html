@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Seleziona Materia</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #e0f7fa, #bbdefb);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      color: #0d47a1;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #01579b;
+    }
+
+    .materie-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 800px;
+      margin-bottom: 40px;
+    }
+
+    .materia-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      font-weight: 600;
+      font-size: 1.2rem;
+      text-align: center;
+      min-width: 140px;
+      color: #0288d1;
+    }
+
+    .materia-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      background: #e3f2fd;
+    }
+
+    .input-section {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .input-section h2 {
+      margin-bottom: 15px;
+      color: #01579b;
+    }
+
+    input {
+      padding: 12px;
+      font-size: 1.1rem;
+      border: 2px solid #90caf9;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 200px;
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    button {
+      background: linear-gradient(to right, #2196f3, #21cbf3);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: opacity 0.3s;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .error {
+      color: #d32f2f;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    @media (max-width: 600px) {
+      .materia-card {
+        min-width: 120px;
+        padding: 16px;
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>📚 Seleziona una Materia</h1>
+
+  <div class="materie-container" id="materieContainer">
+  </div>
+
+  <div class="input-section" id="inputSection" style="display:none;">
+    <h2>Inserisci il numero del documento</h2>
+    <p>File: <span id="previewNome">materia-numero.html</span></p>
+    <input type="number" id="numeroInput" min="1" placeholder="Es. 12" />
+    <br />
+    <button onclick="apriFile()">Apri Documento</button>
+    <div id="errore" class="error"></div>
+  </div>
+
+  <script>
+    const materie = [
+      "math",
+      "system",
+      "history",
+      "italian",
+      "telecom",
+      "gpoi",
+      "english",
+      "sicurezza",
+    ];
+
+    let materiaSelezionata = null;
+
+    const container = document.getElementById("materieContainer");
+    materie.forEach(materia => {
+      const card = document.createElement("div");
+      card.className = "materia-card";
+      card.textContent = materia.charAt(0).toUpperCase() + materia.slice(1);
+      card.onclick = () => selezionaMateria(materia);
+      container.appendChild(card);
+    });
+
+    function selezionaMateria(materia) {
+      materiaSelezionata = materia;
+      document.getElementById("previewNome").textContent = `${materia}-[numero].html`;
+      document.getElementById("inputSection").style.display = "block";
+      document.getElementById("numeroInput").focus();
+      document.getElementById("errore").textContent = "";
+    }
+
+    function apriFile() {
+      if (!materiaSelezionata) return;
+
+      const numero = document.getElementById("numeroInput").value.trim();
+      const erroreEl = document.getElementById("errore");
+
+      if (!numero || isNaN(numero) || numero <= 0) {
+        erroreEl.textContent = "Inserisci un numero valido (es. 1, 12, 100)";
+        return;
+      }
+
+      const nomeFile = `${materiaSelezionata}/${numero}.html`;
+      erroreEl.textContent = "";
+
+      window.location.href = nomeFile;
+    }
+
+    document.getElementById("numeroInput").addEventListener("keypress", (e) => {
+      if (e.key === "Enter") apriFile();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Documento Personalizzato</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+      color: #2c3e50;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 30px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      padding: 50px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #1a202c;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .date, .subject {
+      font-size: 1.1rem;
+      color: #4a5568;
+      background: #f0f4f8;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    /* Stili per i paragrafi personalizzati */
+    .content p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    /* Classi di stile */
+    .grassetto { font-weight: bold !important; }
+    .corsivo { font-style: italic !important; }
+    .sottolineato { text-decoration: underline !important; }
+    .barrato { text-decoration: line-through !important; }
+    .evidenziato { background-color: #fff9c4; padding: 2px 4px; border-radius: 3px; }
+    .grande { font-size: 1.4rem !important; line-height: 1.6; }
+    .piccolo { font-size: 0.9rem !important; line-height: 1.6; }
+
+    /* Sezione immagini */
+    .images-section {
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid #edf2f7;
+    }
+
+    .images-section h2 {
+      font-size: 1.4rem;
+      color: #2d3748;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .images-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .images-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    h1::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(to right, #4f6df5, #7a5ef8);
+      margin: 16px auto 0;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 30px 20px; }
+      h1 { font-size: 2.2rem; }
+      .meta { flex-direction: column; gap: 10px; }
+      .images-container { flex-direction: column; align-items: center; }
+    }
+
+  /* 🔥 TITOLO APPARISCENTE */
+  #titoloparagrafo {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin: 30px 0 24px 0;
+    color: #0d3b66;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    letter-spacing: 0.5px;
+    position: relative;
+  }
+
+  /* Decorazione sotto il titolo */
+  #titoloparagrafo::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, #4a6fa5, #6b8cbc);
+    margin: 14px auto 0;
+    border-radius: 2px;
+  }
+
+  /* Responsive: su mobile il titolo si adatta */
+  @media (max-width: 600px) {
+    #titoloparagrafo {
+      font-size: 1.5rem;
+      margin: 24px 0 20px 0;
+    }
+  }
+
+    #allinea p {
+        text-align: center;
+        margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Sicurezza sul lavoro-1</h1>
+      <div class="meta">
+        <p class="date">16 Ottobre 2025</p>
+        <p class="subject">Materia: Att. Agg.</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- class: grassetto, corsivo, sottolineato,titoloparagrafo, grande, piccolo, evidenziato, barrato, misto senza spazi -->
+      <p id="titoloparagrafo">Il discorso di Mattarella</p>
+      <p>Mattarella recentemente ha tenuto l'ennesimo discorso per gli innumerevoli casi di decessi sul lavoro per continuare a spargere la voce per far aumentare la voce per la sicurezza sul lavoro</p>
+      <p class="corsivo">"La sicurezza sul lavoro non è un optional, ma un diritto fondamentale di ogni lavoratore."</p>
+      <p>Ogni anno, migliaia di lavoratori perdono la vita o subiscono gravi infortuni a causa di condizioni di lavoro non sicure.</p>
+      <p class="sottolineato">Nel 2024 sono stati contati ben 1090 decessi sul lavoro solo in Italia (quai 3 morti al giorno) oltre agli innumerevoli infortuni anche gratis</p>
+        
+      <p class="titoloparagrafo">Statistiche allarmanti</p>
+        <p class="grassetto">Secondo l'ente "VEGA" questi sono i dati del 2024</p>
+        <div>
+            <p>49 DECESSI IN PIÙ DEL 2023 (+4,7%)</p>
+            <p>I LAVORATORI STRANIERI CONTINUANO AD AVERE UN RISCHIO DI MORTE QUASI TRIPLO RISPETTO AGLI ITALIANI.</p>
+            <p>IL SETTORE DELLE COSTRUZIONI RIMANE QUELLO CON IL MAGGIOR NUMERO DI VITTIME: SONO 156.</p>
+            <p>LE REGIONI IN CUI È PIÙ PERICOLOSO LAVORARE SONO BASILICATA, VALLE D’AOSTA, UMBRIA, TRENTINO-ALTO ADIGE, CAMPANIA, SARDEGNA E SICILIA.</p>
+            <p>VENETO E MARCHE A FINE 2024 SONO LE REGIONI PIÙ SICURE</p>
+            <div>
+                <p>I NUMERI DELLE DENUNCE TOTALI DI INFORTUNIO PER SETTORE</p>
+                <p>Anche a fine dicembre 2024 il più elevato numero di denunce totali arriva dalle Attività Manifatturiere (70.842)</p>
+                <p>Seguono: Costruzioni (37.220)</p>
+                <p>Sanità (36.425)</p>
+                <p>Trasporto e Magazzinaggio (34.698)</p>
+                <p>Commercio (33.050)</p>
+            </div>
+        </div>
+
+        <p id="titoloparagrafo">Malattie professionali</p>
+        <p>Le malattie professionali riconosciute nel 2024 sono state 15.937, in aumento del 2,6% rispetto al 2023.</p>
+        <p>Le malattie più comuni sono quelle muscolo-scheletriche (7.500 casi), seguite da quelle respiratorie (3.200 casi) e da quelle dermatologiche (1.800 casi).</p>
+        <p class=>Le malattie professionali rappresentano una minaccia silenziosa per la salute dei lavoratori, spesso sottovalutata rispetto agli infortuni.</p>
+        <p class="evidenziato">È fondamentale che le aziende adottino misure preventive efficaci per proteggere i lavoratori da queste patologie.</p>
+        
+        <p id="titoloparagrafo"></p>
+        <p id="titoloparagrafo">Osserviamo qualche esempio:</p>
+        <p class="grande">Centro commerciale EsseLunga</p>
+        <p>Crolla il solaio del nuovo centro commerciale dell'EsseLunga in costruzione: muoiono 5 operai e 3 rimangono feriti.</p>
+        <p class="grande">Ponte Morandi</p>
+        <p>Crolla il ponte Morandi nel 2018: viene costruito nuovamente in tempi record. Ciò è avvenuto per non bloccare i trasporti.</p>
+
+        <p id="titoloparagrafo">Decreto Legislativo 81/08</p>
+        <div>
+          <p>Titolo I – Principi comuni: Norme e disposizioni generali. </p>
+          <p>Titolo II – Luoghi di lavoro: Requisiti di salute e sicurezza dei luoghi di lavoro. </p>
+          <p>Titolo III – Attrezzature di lavoro e DPI: Uso di attrezzature e dispositivi di protezione individuale. </p>
+          <p>Titolo IV – Cantieri temporanei o mobili: Normative specifiche per cantieri. </p>
+          <p>Titolo V – Segnaletica di sicurezza: Uso della segnaletica di salute e sicurezza sul lavoro. </p>
+          <p>Titolo VI – Movimentazione manuale dei carichi: Procedure per la movimentazione dei carichi. </p>
+          <p>Titolo VII – Videoterminali: Normative sull'uso delle attrezzature con videoterminali. </p>
+          <p>Titolo VIII – Agenti fisici: Rischi derivanti da agenti fisici come rumore, vibrazioni, campi elettromagnetici. </p>
+          <p>Titolo IX – Sostanze pericolose: Normative per la gestione di sostanze chimiche e cancerogene. </p>
+          <p>Titolo X – Agenti biologici: Misure di prevenzione per l'esposizione ad agenti biologici. </p>
+          <p>Titolo X-bis: Protezione dalle ferite da taglio nel settore sanitario. </p>
+          <p>Titolo XI – Atmosfere esplosive: Misure di protezione in ambienti con atmosfere esplosive. </p>
+          <p>Titolo XII – Disposizioni penali: Norme in materia penale e di procedura penale. </p>
+          <p>Titolo XIII – Disposizioni finali: Norme transitorie e finali. </p>
+        </div>
+    </div>
+
+    <!-- Sezione immagini -->
+    <div class="images-section">
+      <h2>Immagini</h2>
+      <div class="images-container">
+        <!-- Aggiungi qui le tue immagini -->
+        <!-- <img src="immagine.jpg" alt="Descrizione"> -->
+         <img src="1/1.png" alt="Zone_Italia">
+         <img src="1/2.png" alt="Organigramma">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    console.log("Documento con stili personalizzati caricato!");
+  </script>
+</body>
+</html>

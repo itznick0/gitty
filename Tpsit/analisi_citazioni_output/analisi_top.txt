@@ -1,0 +1,24 @@
+--- Risultati Analisi Web Scraping ---
+
+Autori più citati (Top 5):
+autore
+Albert Einstein    10
+J.K. Rowling        9
+Marilyn Monroe      7
+Dr. Seuss           6
+Mark Twain          6
+
+----------------------------------------
+
+Parole più comuni (Top 10):
+[('you', 79), ('to', 71), ('is', 67), ('the', 63), ('a', 62), ('of', 48), ('and', 47), ('i', 39), ('not', 33), ('be', 29)]
+
+----------------------------------------
+
+Autori con Citazioni Più Lunghe (Media Lunghezza Caratteri):
+autore
+Pablo Neruda      319.000000
+Bob Marley        286.333333
+J.D. Salinger     241.000000
+Marilyn Monroe    240.857143
+Elie Wiesel       224.000000

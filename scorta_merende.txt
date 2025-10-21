@@ -1,0 +1,51 @@
+{
+    "merende": [
+        {
+            "nome": "Patatine",
+            "quantita": 5,
+            "peso": 2
+        },
+        {
+            "nome": "Waffer",
+            "quantita": 6,
+            "peso": 1
+        },
+        {
+            "nome": "Biscotti multi gusto",
+            "quantita": 12,
+            "peso": 1
+        },
+        {
+            "nome": "Cioccolatine",
+            "quantita": 9,
+            "peso": 1
+        },
+        {
+            "nome": "pop corn",
+            "quantita": 5,
+            "peso": 1
+        }
+    ],
+    "bevande": [
+        {
+            "nome": "Succo di mela",
+            "quantita": 3
+        },
+        {
+            "nome": "Yogurt fragola",
+            "quantita": 2
+        },
+        {
+            "nome": "latte vaniglia",
+            "quantita": 1
+        },
+        {
+            "nome": "latte cioccolato",
+            "quantita": 1
+        },
+        {
+            "nome": "te",
+            "quantita": 5
+        }
+    ]
+}

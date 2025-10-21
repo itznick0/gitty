@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Documento Personalizzato</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+      color: #2c3e50;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 30px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      padding: 50px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #1a202c;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .date, .subject {
+      font-size: 1.1rem;
+      color: #4a5568;
+      background: #f0f4f8;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    /* Stili per i paragrafi personalizzati */
+    .content p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    /* Classi di stile */
+    .grassetto { font-weight: bold !important; }
+    .corsivo { font-style: italic !important; }
+    .sottolineato { text-decoration: underline !important; }
+    .barrato { text-decoration: line-through !important; }
+    .evidenziato { background-color: #fff9c4; padding: 2px 4px; border-radius: 3px; }
+    .grande { font-size: 1.4rem !important; line-height: 1.6; }
+    .piccolo { font-size: 0.9rem !important; line-height: 1.6; }
+
+    /* Sezione immagini */
+    .images-section {
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid #edf2f7;
+    }
+
+    .images-section h2 {
+      font-size: 1.4rem;
+      color: #2d3748;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .images-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .images-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    h1::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(to right, #4f6df5, #7a5ef8);
+      margin: 16px auto 0;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 30px 20px; }
+      h1 { font-size: 2.2rem; }
+      .meta { flex-direction: column; gap: 10px; }
+      .images-container { flex-direction: column; align-items: center; }
+    }
+
+  /* 🔥 TITOLO APPARISCENTE */
+  #titoloparagrafo {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin: 30px 0 24px 0;
+    color: #0d3b66;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    letter-spacing: 0.5px;
+    position: relative;
+  }
+
+  /* Decorazione sotto il titolo */
+  #titoloparagrafo::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, #4a6fa5, #6b8cbc);
+    margin: 14px auto 0;
+    border-radius: 2px;
+  }
+
+  /* Responsive: su mobile il titolo si adatta */
+  @media (max-width: 600px) {
+    #titoloparagrafo {
+      font-size: 1.5rem;
+      margin: 24px 0 20px 0;
+    }
+  }
+
+    #allinea p {
+        text-align: center;
+        margin: 8px 0;
+    }
+
+      /* Stile per la sezione immagine + didascalia */
+  #immaginedidascalia {
+    max-width: 600px;
+    margin: 30px auto;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    background: #f0f0f0; /* colore di fallback */
+    padding: 20px;
+    text-align: center;
+  }
+
+  #immaginedidascalia img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  #immaginedidascalia .didascalia {
+    font-size: 1.05rem;
+    color: #2d3748;
+    margin: 0;
+    line-height: 1.5;
+  }
+  #pdf-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 14px 28px;
+      background: linear-gradient(to right, #1976d2, #42a5f5);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(25, 118, 210, 0.3);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    #pdf-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(25, 118, 210, 0.4);
+    }
+
+    /* Nascondi il bottone in stampa */
+    @media print {
+      #pdf-button {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+    <button id="pdf-button" onclick="window.print()">📄 Scarica come PDF</button>
+  <div class="container">
+    <div class="header">
+      <h1>Titolo del Documento</h1>
+      <div class="meta">
+        <p class="date">15 Ottobre 2025</p>
+        <p class="subject">Materia: Italiano</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- class: grassetto, corsivo, sottolineato,titoloparagrafo, grande, piccolo, evidenziato, barrato, misto senza spazi -->
+       <div id="allinea">
+<p class="evidenziato grassetto corsivo">1. Testo Completo con Tutte le Informazioni</p>
+<p></p>
+<p>I. Umanesimo e Rinascimento: La Nuova Visione dell'Uomo</p>
+<p>A partire dalla seconda metà del Trecento si verificò un profondo mutamento culturale e di mentalità in Italia, noto come Umanesimo e Rinascimento. L'elemento centrale fu un nuovo approccio al passato: le opere degli autori classici non furono più lette attraverso il filtro della cultura cristiana, ma furono ricollocate nel loro contesto storico originale.</p>
+<p></p>
+<p>Questo portò alla nascita della filologia, la disciplina della ricostruzione critica dei testi. Un esempio fondamentale fu la scoperta da parte di Lorenzo Valla che il Constitutum Constantini (la donazione di Roma all'autorità papale) era un falso storico.</p>
+<p></p>
+<p>La cultura umanistico-rinascimentale poneva l'uomo al centro del mondo (antropocentrismo), esaltando la sua dignità e la capacità di costruire il proprio destino e di trasformare la realtà (come espresso nel De hominis dignitate di Pico della Mirandola). L'indagine sulla natura, pur includendo pratiche come l'astrologia e la magia, stimolò l'interesse per l'algebra e la geometria, ponendo le basi per l'approccio empirico della scienza moderna.</p>
+<p></p>
+<p>Un fattore cruciale per la diffusione di questa nuova cultura fu l'invenzione della stampa a caratteri mobili da parte di Johannes Gutenberg a metà del XV secolo. Questa tecnica, insieme all'uso della carta, abbassò i costi e aumentò enormemente la circolazione dei libri, rendendo Venezia, con stampatori come Aldo Manuzio, un centro tipografico di primaria importanza.</p>
+<p></p>
+<p>In ambito politico, l'Umanesimo Civico si sviluppò nelle aree (soprattutto comunali) in cui la partecipazione attiva alla vita pubblica era ancora forte, vedendo nella Repubblica romana un modello contro la tirannide. Il maggiore autore in questo campo fu Niccolò Machiavelli, che con Il Principe cercò di sviluppare una moderna scienza politica.</p>
+<p></p>
+<p>L'arte rinascimentale raggiunse il massimo splendore con artisti come Leonardo da Vinci, Raffaello Sanzio e Michelangelo Buonarroti, caratterizzandosi per il realismo, l'attenzione alla dimensione psicologica dei soggetti e l'invenzione della prospettiva. Le Corti dei principi italiani divennero i nuovi centri di produzione artistica e i mecenati che commissionavano opere per celebrare il proprio potere.</p>
+<p></p>
+<p>II. La Penisola Italiana: Dalle Signorie alla Pace di Lodi</p>
+<p>Nell'Italia centro-settentrionale tra il XIV e il XV secolo, la frammentazione politica e la perenne conflittualità interna ai Comuni portarono all'affermazione di «uomini forti» (Podestà o Capitani del Popolo) che concentrarono il potere. Questi presero il titolo di Dominus (Signore), dando origine alle Signorie Cittadine, spesso legittimate dall'imperatore (Enrico VII) con il titolo di Vicario imperiale.</p>
+<p></p>
+<p>Le Signorie portarono alla formazione di Stati sovracittadini, come l'espansione di Verona sotto gli Scaligeri o il Ducato di Milano. A Milano, dopo i Visconti, il condottiero Francesco Sforza conquistò la città (1450) e si proclamò duca.</p>
+<p></p>
+<p>Firenze mantenne a lungo un sistema istituzionale basato su organismi collegiali controllati dal Popolo Grasso (oligarchia) ma, dopo l'oligarchia degli Albizzi, Cosimo de' Medici (dal 1433) stabilì di fatto una Signoria all'interno dell'ordinamento repubblicano, continuata poi con il nipote Lorenzo il Magnifico.</p>
+<p></p>
+<p>Venezia si distinse, evolvendo in una Repubblica aristocratica. Nonostante avesse un Doge eletto a vita, il potere era concentrato in un'élite di poche centinaia di famiglie, il Patriziato, che controllava l'organismo politico più importante, il Maggior Consiglio.</p>
+<p></p>
+<p>Le continue guerre tra i cinque Stati maggiori della penisola (Ducato di Milano, Repubblica di Venezia, Repubblica di Firenze, Stato della Chiesa e Regno di Napoli) furono interrotte dalla Pace di Lodi del 1454, stipulata dopo la caduta di Costantinopoli, che diede avvio a una fase di equilibrio politico.</p>
+<p></p>
+<p>III. Il Mediterraneo e i Nuovi Imperi</p>
+<p>Alla fine del XIII secolo, l'immenso Impero mongolo fondato da Genghiz Khan si frammentò in Khanati indipendenti dopo la morte di Qubilai (1294). Nella seconda metà del XIV secolo, l'ascesa di Tamerlano in Asia centrale portò a un tentativo di rifondare l'impero. Tamerlano conquistò la Persia, la Mesopotamia e la Siria, e sconfisse i Turchi Ottomani ad Ankara (1402). Le sue guerre, tuttavia, compromisero la praticabilità della Via della Seta settentrionale. Dopo la sua morte (1405), l'impero si frammentò nuovamente, portando indirettamente alla nascita di tre imperi musulmani (Moghul, Safavide e Ottomano) e all'affermazione del Principato di Mosca e dell'Impero Russo.</p>
+<p></p>
+<p>Nel XIV secolo, l'Impero bizantino era in uno stato di decadenza irreversibile. Il colpo definitivo arrivò dall'avanzata dei Turchi Ottomani, che avevano già sconfitto una coalizione europea a Nicopoli nel 1396. La crescente potenza ottomana culminò con l'assedio e la conquista di Costantinopoli da parte del sultano Mehmed II il 29 maggio 1453, ponendo fine al millenario Impero bizantino.</p>
+<p></p>
+<p>Tra Quattrocento e Cinquecento, il Mediterraneo vide nuovi equilibri: la scomparsa di Bisanzio e la presa di forza dell'Impero Ottomano e della Monarchia Spagnola (con la presenza aragonese in Sicilia, Sardegna e Baleari). La Spagna completò la Reconquista con la caduta del regno di Granada nel 1492 e istituì il tribunale dell'Inquisizione (1478) per verificare le conversioni ebraiche, culminato con l'espulsione degli ebrei sefarditi.</p>
+<p></p>
+<p>IV. Le Scoperte Geografiche e il Nuovo Mondo</p>
+<p>Nel XV secolo, il desiderio di aggirare gli intermediari nel commercio con l'Asia e la chiusura della Via della Seta settentrionale spinsero gli europei a cercare una via di esplorazione marittima. La navigazione in mare aperto fu resa possibile dall'introduzione di nuovi strumenti (come la bussola, il quadrante, l'astrolabio) e dalla messa a punto di una nuova imbarcazione, la caravella.</p>
+<p></p>
+<p>Il Portogallo fu il pioniere, esplorando la costa atlantica dell'Africa (Madera, Azzorre, Capo Verde) nel corso del '400, con l'obiettivo di trovare una via per l'Asia. L'esplorazione portoghese portò all'impianto di un'economia di piantagione nelle isole. L'impresa più importante fu la circumnavigazione dell'Africa da parte di Bartolomeu Dias (superamento del Capo di Buona Speranza, 1487-1488), seguita da Vasco da Gama che raggiunse l'India (Calicut) nel 1497-1498. Il Portogallo stabilì così l'Estado da Índia (con sede a Goa), monopolizzando il commercio di spezie nell'Oceano Indiano.</p>
+<p></p>
+<p>Nello stesso periodo, il navigatore genovese Cristoforo Colombo, basandosi sui calcoli di Paolo dal Pozzo Toscanelli, si convinse di poter raggiungere l'Asia navigando verso occidente. Trovando il sostegno dei sovrani spagnoli (Isabella di Castiglia), salpò il 3 agosto 1492 e raggiunse le Bahamas (isola di San Salvador) il 14 ottobre. Nonostante i suoi quattro viaggi, fu Amerigo Vespucci a diffondere la convinzione che le terre scoperte fossero un "Nuovo Mondo", battezzato in suo onore America.</p>
+<p></p>
+<p>Per definire le rispettive zone di influenza, Spagna e Portogallo stipularono il Trattato di Tordesillas (1494), che fissò una linea di separazione (la raya) nell'Atlantico. Un'altra impresa fondamentale fu la prima circumnavigazione del globo completata dalla spedizione di Ferdinando Magellano (1519-1522), che scoprì l'Oceano Pacifico e raggiunse le Filippine (dove Magellano morì).</p>
+<p></p>
+<p>In America, gli europei incontrarono i grandi imperi precolombiani: Maya, Aztechi (in Messico) e Incas (sulle Ande peruviane). A partire dal 1519, i Conquistadores spagnoli, guidati da Hernán Cortés, iniziarono l'occupazione del Messico, sottomettendo gli Aztechi. La popolazione indigena (Indios) fu decimata dallo sfruttamento (come il sistema dell'encomienda) e dalla diffusione di malattie europee. Le condizioni degli Indios furono aspramente criticate da ecclesiastici come il frate domenicano Bartolomé de Las Casas. Questo incontro/scontro tra culture innescò il cosiddetto Scambio Colombiano di piante e animali tra i due mondi.</p>
+<p></p>
+<p>2. Riassunto</p>
+<p>Il periodo tra il XIV e il XVI secolo è segnato da profondi cambiamenti culturali, politici e geografici.</p>
+<p></p>
+<p>In Italia, l'Umanesimo e il Rinascimento (dal tardo Trecento) segnano il passaggio a una visione antropocentrica dell'uomo, capace di costruire il proprio destino, valorizzando i classici e la ragione critica (filologia, Constitutum Constantini di Valla). L'invenzione della stampa a caratteri mobili (Gutenberg, XV sec.) accelerò la diffusione della cultura. Politicamente, l'Italia centro-settentrionale vide l'affermazione delle Signorie Cittadine (es. Milano, Firenze con i Medici) e la stabilizzazione di poteri forti come la Repubblica Aristocratica di Venezia. Le guerre tra i principali Stati italiani cessarono temporaneamente con la Pace di Lodi del 1454.</p>
+<p></p>
+<p>Nel Mediterraneo e in Asia, il Grande Impero Mongolo si dissolse dopo Tamerlano, portando alla nascita di nuovi poteri, tra cui i tre Imperi musulmani (Moghul, Safavide, Ottomano) e l'Impero Russo. L'Impero Bizantino crollò definitivamente il 29 maggio 1453 con la conquista di Costantinopoli da parte del sultano ottomano Mehmed II, alterando gli equilibri del Mediterraneo a favore di Ottomani e Spagna. La Spagna, unificata, terminò la Reconquista con la caduta di Granada (1492).</p>
+<p></p>
+<p>In contemporanea, il progresso nautico (caravella, astrolabio) aprì l'era delle Scoperte Geografiche. Il Portogallo circumnavigò l'Africa (Dias, 1487-88) e raggiunse l'India (Da Gama, 1498), creando l'Estado da Índia. La Spagna sponsorizzò Cristoforo Colombo che, nel 1492, credendo di aver raggiunto le Indie, scoprì l'America. Le nuove terre, un "Nuovo Mondo" (battezzato America da Vespucci), furono spartite con il Trattato di Tordesillas (1494). La successiva conquista da parte dei Conquistadores (es. Cortés sugli Aztechi) portò alla decimazione degli Indios a causa dello sfruttamento (come l'encomienda) e delle malattie.</p>
+<p></p>
+<p>3. Schema dei Contenuti</p>
+<p>I. UMANESIMO e RINASCIMENTO (XIV-XVI sec.)</p>
+<p>Fondamenti Culturali:</p>
+<p></p>
+<p>Mutamento di mentalità (dal Tardo Trecento).</p>
+<p></p>
+<p>Rapporto con il Passato: Rilettura dei Classici nel loro contesto storico (non più filtro cristiano).</p>
+<p></p>
+<p>Filologia: Nascita della critica testuale (es. Lorenzo Valla e il falso Constitutum Constantini).</p>
+<p></p>
+<p>Antropocentrismo: Uomo al centro, libero di costruire il proprio destino (De hominis dignitate di Pico).</p>
+<p></p>
+<p>Scienza/Natura: Approccio empirico, geometria e algebra (basi per la scienza moderna).</p>
+<p></p>
+<p>Innovazioni e Diffusione:</p>
+<p></p>
+<p>Stampa: Invenzione di Gutenberg (metà XV sec.) → accelerazione culturale, Venezia centro tipografico (Aldo Manuzio).</p>
+<p></p>
+<p>Politica e Arte:</p>
+<p></p>
+<p>Umanesimo Civico: Partecipazione attiva (modello Repubblica Romana).</p>
+<p></p>
+<p>Scienza Politica: Niccolò Machiavelli e Il Principe.</p>
+<p></p>
+<p>Arte Rinascimentale: Realismo, psicologia, invenzione della Prospettiva. Massimi esponenti: Leonardo, Raffaello, Michelangelo.</p>
+<p></p>
+<p>Mecenatismo: Le Corti (principi italiani) come centri di produzione e potere.</p>
+<p></p>
+<p>II. ITALIA (XIV-XV sec.): Dalle Signorie alla Pace</p>
+<p>Frammentazione e Consolidamento:</p>
+<p></p>
+<p>Crisi del Comune (conflittualità) → Ascesa di "uomini forti" (Podestà/Capitani).</p>
+<p></p>
+<p>Signorie Cittadine: Il Dominus e la legittimazione (Vicario Imperiale di Enrico VII).</p>
+<p></p>
+<p>Stati Sovracittadini: (es. Milano: Visconti → Francesco Sforza, Firenze: Oligarchia → Cosimo de' Medici).</p>
+<p></p>
+<p>Il Caso Venezia:</p>
+<p></p>
+<p>Repubblica Aristocratica: Potere al Patriziato (controllo del Maggior Consiglio).</p>
+<p></p>
+<p>Doge eletto a vita, affiancato da Consigli (Maggior Consiglio, Senato).</p>
+<p></p>
+<p>Equilibrio:</p>
+<p></p>
+<p>Pace di Lodi (1454): Firmata tra i 5 Stati maggiori (Milano, Venezia, Firenze, Chiesa, Napoli) dopo la caduta di Costantinopoli.</p>
+<p></p>
+<p>III. MEDITERRANEO e IMPERI (XIV-XV sec.)</p>
+<p>Eredi Mongoli:</p>
+<p></p>
+<p>Frammentazione Impero Mongolo (post-Qubilai 1294).</p>
+<p></p>
+<p>Tamerlano (tardo XIV sec.): Tentativo di rifondazione. Conquiste (Persia, Siria). Sconfitta Ottomani (Ankara 1402). Compromissione Via della Seta settentrionale.</p>
+<p></p>
+<p>Nuovi Imperi (post-1405): Moghul, Safavide, Ottomano, Impero Russo (Principato di Mosca).</p>
+<p></p>
+<p>Declino Bizantino:</p>
+<p></p>
+<p>Crisi: Decadenza irreversibile (guerre interne, minacce esterne).</p>
+<p></p>
+<p>Caduta: Conquista di Costantinopoli da parte di Mehmed II il 29 maggio 1453 → Fine Impero Bizantino.</p>
+<p></p>
+<p>Nuovi Equilibri Mediterranei: Predominio di Impero Ottomano e Monarchia Spagnola.</p>
+<p></p>
+<p>Spagna: Caduta di Granada (1492); Istituzione Inquisizione (1478) ed espulsione ebrei Sefarditi.</p>
+<p></p>
+<p>IV. SCOPERTE GEOGRAFICHE (XV-XVI sec.)</p>
+<p>Cause e Strumenti:</p>
+<p></p>
+<p>Obiettivo: Via marittima per l'Asia (aggirare intermediari, Via della Seta).</p>
+<p></p>
+<p>Tecnologia: Bussola, Astrolabio, Quadrante, Caravella (navigazione in alto mare).</p>
+<p></p>
+<p>Le Esplorazioni Portoghesi (Africa e Asia):</p>
+<p></p>
+<p>Pionieri (Cantieristica/Astronomia).</p>
+<p></p>
+<p>Bartolomeu Dias (1487-88): Circumnavigazione Africa (Capo di Buona Speranza).</p>
+<p></p>
+<p>Vasco da Gama (1497-98): Raggiunge l'India (Calicut).</p>
+<p></p>
+<p>Esito: Monopolio spezie, creazione Estado da Índia (Goa).</p>
+<p></p>
+<p>Le Esplorazioni Spagnole (America):</p>
+<p></p>
+<p>Cristoforo Colombo (1492): Raggiunge le Bahamas (San Salvador) navigando a Ovest.</p>
+<p></p>
+<p>Amerigo Vespucci: Convinzione del "Nuovo Mondo" (America).</p>
+<p></p>
+<p>Spartizione: Trattato di Tordesillas (1494) → divisione sfere d'influenza (la raya).</p>
+<p></p>
+<p>Magellano (1519-22): Prima circumnavigazione (raggiunge Filippine, dove muore).</p>
+<p></p>
+<p>Conquista e Impatto:</p>
+<p></p>
+<p>Imperi Precolombiani: Maya, Aztechi, Incas.</p>
+<p></p>
+<p>Conquistadores: Hernán Cortés (conquista Aztechi dal 1519).</p>
+<p></p>
+<p>Decimazione Indios: Sfruttamento (es. encomienda) e malattie. Critica di Bartolomé de Las Casas.</p>
+<p></p>
+<p>Scambio Colombiano: Scambio di piante e animali tra i due mondi.</p>
+<p></p>
+<p>4. 10 Domande di Ragionamento</p>
+<p>Ecco 10 domande per verificare la tua comprensione e la tua capacità di connettere gli argomenti:</p>
+<p></p>
+<p>Analisi Culturale e Politica: In che modo la riscoperta filologica dei classici, tipica dell'Umanesimo, ha avuto un impatto diretto e concreto sulla politica e la legittimità del potere nel XV secolo? Quale esempio storico lo dimostra?</p>
+<p></p>
+<p>Cambiamento e Continuità in Italia: Sebbene molte città italiane abbiano adottato la forma della Signoria, Venezia è rimasta una Repubblica Aristocratica. Spiega la differenza fondamentale nel sistema di potere tra una Signoria (come Milano sotto Sforza o Firenze sotto i Medici) e la Repubblica aristocratica veneziana, e perché quest'ultima struttura istituzionale è stata "ostile" allo sviluppo di un potere signorile.</p>
+<p></p>
+<p>Causa-Effetto Globale: Qual è stato il legame tra la caduta di Costantinopoli (1453), la Pace di Lodi (1454) e le Scoperte Geografiche? Come hanno interagito questi tre eventi apparentemente distanti?</p>
+<p></p>
+<p>Innovazione e Commercio: Descrivi l'importanza della stampa a caratteri mobili per la diffusione dell'Umanesimo/Rinascimento e mettila in parallelo con l'importanza della caravella per le scoperte geografiche. Quali tipi di "costi" e "rischi" hanno ridotto queste due innovazioni per l'Europa?</p>
+<p></p>
+<p>Critica e Coscienza: Quali argomenti utilizzava il frate domenicano Bartolomé de Las Casas per criticare il trattamento riservato agli Indios e in che modo le sue denunce riflettevano, in modo indiretto, alcuni dei principi di dignità dell'uomo promossi dalla cultura umanistico-rinascimentale?</p>
+<p></p>
+<p>Equilibri di Potere: La dissoluzione dell'Impero Mongolo ha portato alla nascita di nuovi imperi, tra cui l'Ottomano. Spiega come la crescita dell'Impero Ottomano abbia influito negativamente sulle rotte commerciali tradizionali (Via della Seta) e positivamente sulla stabilità politica in Italia.</p>
+<p></p>
+<p>Geopolitica Marittima: Confronta l'obiettivo e la strategia di espansione di Portogallo e Spagna nel XV secolo. Quale dei due paesi era primariamente interessato a una base commerciale nell'Oceano Indiano e quale, per necessità, si è imbattuto in un "Nuovo Mondo"?</p>
+<p></p>
+<p>Il Pensiero Politico: Qual è l'innovazione principale introdotta da Niccolò Machiavelli con Il Principe, e in che modo la sua analisi del potere si distacca dalla visione politica medievale, riprendendo invece, in parte, l'approccio critico e pragmatico dell'Umanesimo?</p>
+<p></p>
+<p>L'Impatto della Conquista: Quali furono i due fattori principali che portarono alla decimazione degli Indios in America e perché il sistema dell'encomienda, sebbene formalmente non riducesse gli Indios in schiavitù, era di fatto una forma di sfruttamento estremo?</p>
+<p></p>
+<p>L'Arte e il Potere: Perché le Corti (dei principi o del Pontefice) divennero i nuovi centri di produzione artistica e di mecenatismo, e come la nuova arte rinascimentale (es. l'uso della prospettiva e il realismo) si prestava a rappresentare il prestigio e il potere di chi la commissionava?</p>
+</div>
+    </div>
+
+    <!-- Sezione immagini -->
+    <div class="images-section">
+      <h2>Immagini</h2>
+      <div class="images-container">
+        <!-- Aggiungi qui le tue immagini -->
+        <!-- <img src="immagine.jpg" alt="Descrizione"> -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    console.log("Documento con stili personalizzati caricato!");
+
+    // Genera un colore pastello/morbido casuale (non fluo, non primari puri)
+  function generaColoreMorbido() {
+    // Usiamo una palette di tonalità tenui: grigi azzurri, verdi salvia, beige, lavanda, ecc.
+    const colori = [
+      "#e6f0fa", // azzurro chiaro
+      "#f0f7ee", // verde menta tenue
+      "#fdf6f0", // beige caldo
+      "#f8f4fa", // lavanda chiaro
+      "#f2f5f9", // grigio-blu
+      "#f9f7f2", // avorio
+      "#f0f4f8", // celeste polvere
+      "#f5f0f6", // lilla tenue
+      "#f1f8e9", // verde pallido
+      "#e8f5f2"  // turchese soft
+    ];
+    return colori[Math.floor(Math.random() * colori.length)];
+  }
+
+  // Applica il colore allo sfondo al caricamento
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("immaginedidascalia");
+    if (container) {
+      container.style.backgroundColor = generaColoreMorbido();
+    }
+  });
+
+  </script>
+</body>
+</html>

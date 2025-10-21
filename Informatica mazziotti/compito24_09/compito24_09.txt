@@ -1,0 +1,5 @@
+Legenda:
+-compito24_09.py => Crea il file .pkl
+-compito24_09-2.py => Trasforma il file .pkl nell comunicazione .txt
+-compito24_09-2.txt => Contiene l'elenco di tutte le classi con gli studenti e l'età di ogni studente data randomicamente tranne la sezione P non trovata negli elenchi
+-compito24_09-3.txt => Si crea all'interno l'indice CLASSE-POSIZIONE

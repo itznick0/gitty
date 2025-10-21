@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Conversione Binario Decimale</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9fafb;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #0d5c4c;
+      margin-bottom: 30px;
+    }
+    .binary-inputs {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px auto;
+      max-width: 400px;
+    }
+    .bit-box {
+      width: 60px;
+      height: 60px;
+      background-color: #fff2cc;
+      border: 2px solid #e6c27c;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .bit-box:hover {
+      background-color: #ffe599;
+    }
+    button {
+      background-color: #0d5c4c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.2s;
+    }
+    button:hover {
+      background-color: #0a4a3c;
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #0d5c4c;
+    }
+  </style>
+</head>
+<body>
+  <h1>conversione binario decimale</h1>
+
+  <div class="binary-inputs" id="binaryInputs">
+    <div class="bit-box">0</div>
+    <div class="bit-box">0</div>
+    <div class="bit-box">0</div>
+    <div class="bit-box">0</div>
+  </div>
+
+  <button id="calculateBtn">calcola</button>
+
+  <div id="result">Risultato: 0</div>
+
+  <script>
+    const toggleBit = (box) => {
+      if (box.innerText === '0') {
+        box.innerText = '1';
+      } else {
+        box.innerText = '0';
+      }
+    };
+
+    const calculate = () => {
+      const boxes = document.querySelectorAll('.bit-box');
+      let decimal = 0;
+      boxes.forEach((box, index) => {
+        if (box.innerText === '1') {
+          decimal += Math.pow(2, boxes.length - 1 - index);
+        }
+      });
+      document.getElementById('result').innerText = `Risultato: ${decimal}`;
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const boxes = document.querySelectorAll('.bit-box');
+      const calculateBtn = document.getElementById('calculateBtn');
+
+      boxes.forEach(box => {
+        box.addEventListener('click', () => toggleBit(box));
+      });
+
+      calculateBtn.addEventListener('click', calculate);
+    });
+  </script>
+</body>
+</html>

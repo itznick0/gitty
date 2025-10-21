@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Documento Personalizzato</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+      color: #2c3e50;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 30px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      padding: 50px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #1a202c;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .date, .subject {
+      font-size: 1.1rem;
+      color: #4a5568;
+      background: #f0f4f8;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    /* Stili per i paragrafi personalizzati */
+    .content p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    /* Classi di stile */
+    .grassetto { font-weight: bold !important; }
+    .corsivo { font-style: italic !important; }
+    .sottolineato { text-decoration: underline !important; }
+    .barrato { text-decoration: line-through !important; }
+    .evidenziato { background-color: #fff9c4; padding: 2px 4px; border-radius: 3px; }
+    .grande { font-size: 1.5rem !important; line-height: 1.6; }
+    .piccolo { font-size: 0.9rem !important; line-height: 1.6; }
+
+    /* Sezione immagini */
+    .images-section {
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid #edf2f7;
+    }
+
+    .images-section h2 {
+      font-size: 1.4rem;
+      color: #2d3748;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .images-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .images-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    h1::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(to right, #4f6df5, #7a5ef8);
+      margin: 16px auto 0;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 30px 20px; }
+      h1 { font-size: 2.2rem; }
+      .meta { flex-direction: column; gap: 10px; }
+      .images-container { flex-direction: column; align-items: center; }
+    }
+
+  /* 🔥 TITOLO APPARISCENTE */
+  #titoloparagrafo {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin: 30px 0 24px 0;
+    color: #0d3b66;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    letter-spacing: 0.5px;
+    position: relative;
+  }
+
+  /* Decorazione sotto il titolo */
+  #titoloparagrafo::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, #4a6fa5, #6b8cbc);
+    margin: 14px auto 0;
+    border-radius: 2px;
+  }
+
+  /* Responsive: su mobile il titolo si adatta */
+  @media (max-width: 600px) {
+    #titoloparagrafo {
+      font-size: 1.5rem;
+      margin: 24px 0 20px 0;
+    }
+  }
+
+    #allinea p {
+        text-align: center;
+        margin: 8px 0;
+    }
+
+      /* Stile per la sezione immagine + didascalia */
+  #immaginedidascalia {
+    max-width: 600px;
+    margin: 30px auto;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    background: #f0f0f0; /* colore di fallback */
+    padding: 20px;
+    text-align: center;
+  }
+
+  #immaginedidascalia img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  #immaginedidascalia .didascalia {
+    font-size: 1.05rem;
+    color: #2d3748;
+    margin: 0;
+    line-height: 1.5;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>The World’s Most Famous Prisons and San Vittore</h1>
+      <div class="meta">
+        <p class="date">16 Ottobre 2025</p>
+        <p class="subject">Materia: English</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- class: grassetto, corsivo, sottolineato,titoloparagrafo, grande, piccolo, evidenziato, barrato, misto senza spazi, immaginedidascalia, didascalia-->
+       <div>
+<p class="grande grassetto">Some prisons are famous not just for the criminals that were locked in it, but because they have an important story.</p>
+<p></p>
+<p class="sottolineato corsivo">1. Alcatraz (USA)</p>
+<p>Alcatraz is a prison on an island near San Francisco. It was very tough and almost no one ever escaped. Famous gangsters like Al Capone were locked in it. Today it’s closed and it became a museum for the tourists.</p>
+<p></p>
+<p class="sottolineato corsivo">2. Robben Island (South Africa)</p>
+<p>Nelson Mandela was locked in it for 18 years during the apartheid (a time when black people in South Africa were treated unfairly). Today it's a symbol of freedom and justice.</p>
+<p></p>
+<p class="sottolineato corsivo">3. The Bastille (France)</p>
+<p>This was a fortress-prison in Paris and, in 1789, the people attacked and destroyed it and that became the start of the French Revolution. The Bastille is now destroyed, but it still be a simbol of the fight against unfair power.</p>
+<p></p>
+<p class="sottolineato corsivo">4. Eastern State Penitentiary (USA)</p>
+<p>It's locate in Philadelphia and this prison was known for keeping inmates alone in silence to make they  think about their crimes . Al Capone was also locked in it. Today it’s a museum.</p>
+<p></p>
+<p class="sottolineato corsivo">San Vittore (Italy)</p>
+<p>Finally this is the most well-known prison in Italy (more precisely in Milan). It has held mafia members, terrorists and famous people. It’s still in use today but it’s not too much famous around the world and also in Itlay but however it's helding around 1044 prigioniers.</p>
+</div>
+    </div>
+
+    <!-- Sezione immagini -->
+    <div class="images-section">
+      <h2>Immagini</h2>
+      <div class="images-container">
+        <!-- Aggiungi qui le tue immagini -->
+        <!-- <img src="immagine.jpg" alt="Descrizione"> -->
+         <div id="immaginedidascalia">
+            <img src="1/1.png" alt="Al Capone">
+            <p class="didascalia">Alphonse Gabriel, called "Al Capone" (also known as "Scarface"), was a famous american gangster of italian origin who operated during the Prohibition era (a period in U.S. history from 1920 to 1933 when the production, transportation and sale of alcoholic beverages were illegal).</p>
+         </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    console.log("Documento con stili personalizzati caricato!");
+    // Genera un colore pastello/morbido casuale (non fluo, non primari puri)
+  function generaColoreMorbido() {
+    // Usiamo una palette di tonalità tenui: grigi azzurri, verdi salvia, beige, lavanda, ecc.
+    const colori = [
+      "#e6f0fa", // azzurro chiaro
+      "#f0f7ee", // verde menta tenue
+      "#fdf6f0", // beige caldo
+      "#f8f4fa", // lavanda chiaro
+      "#f2f5f9", // grigio-blu
+      "#f9f7f2", // avorio
+      "#f0f4f8", // celeste polvere
+      "#f5f0f6", // lilla tenue
+      "#f1f8e9", // verde pallido
+      "#e8f5f2"  // turchese soft
+    ];
+    return colori[Math.floor(Math.random() * colori.length)];
+  }
+
+  // Applica il colore allo sfondo al caricamento
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("immaginedidascalia");
+    if (container) {
+      container.style.backgroundColor = generaColoreMorbido();
+    }
+  });
+
+  </script>
+</body>
+</html>
+
+
+
+

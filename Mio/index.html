@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Le Mie Materie</title>
+<style>
+  :root{
+    --bg:#f6f8fb; --fg:#0f172a; --muted:#6b7280; --card:#ffffff; --line:#e5e7eb;
+    --primary:#3478f6; --primary-700:#2a63cc; --danger:#e11d48; --ok:#10b981;
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+    --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Inter,Arial,sans-serif;
+    color:var(--fg); background:var(--bg);
+  }
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:10;
+    background:linear-gradient(#fff, #fff9);
+    backdrop-filter:saturate(1.2) blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .bar{
+    max-width:1100px; margin:0 auto; padding:18px 16px; display:flex; align-items:center; gap:16px;
+  }
+  .title{
+    font-size:28px; font-weight:800; letter-spacing:.2px;
+  }
+  .subtitle{color:var(--muted); font-size:14px; display:flex; align-items:center; gap:8px}
+  .subtitle .dot{width:8px;height:8px;border-radius:999px;background:#3b82f6;display:inline-block}
+  .spacer{flex:1}
+  .icon-btn{
+    border:none; background:#fff; width:40px; height:40px; display:grid; place-items:center;
+    border-radius:999px; cursor:pointer; box-shadow:var(--shadow);
+    transition:.15s transform, .15s box-shadow;
+  }
+  .icon-btn:hover{transform:translateY(-1px)}
+  .icon-btn svg{width:22px; height:22px; stroke:#334155}
+  .pencil-toggle.active{outline:2px solid var(--primary); outline-offset:2px}
+
+  /* Content */
+  main{max-width:1100px;margin:12px auto 80px; padding:0 16px}
+  .crumbs{display:flex; align-items:center; gap:8px; color:var(--muted); font-size:14px; margin:8px 0 12px}
+  .crumbs a{color:inherit; text-decoration:none}
+  .crumbs a:hover{text-decoration:underline}
+
+  .list{
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .item{
+    display:flex; align-items:center; gap:14px; background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius); padding:16px 16px; box-shadow:var(--shadow);
+  }
+  .item.clickable{cursor:pointer}
+  .left{
+    display:flex; align-items:center; gap:14px; flex:1; min-width:0;
+  }
+  .color-dot{
+    width:14px; height:14px; border-radius:999px; outline:2px solid #ffffff; box-shadow:0 0 0 2px var(--line) inset;
+  }
+  .name{font-weight:700}
+  .meta{color:var(--muted); font-size:13px}
+  .right{margin-left:auto; display:flex; align-items:center; gap:8px}
+  .ghost{
+    opacity:0; pointer-events:none; transition:.12s opacity;
+  }
+  body.manage .ghost{opacity:1; pointer-events:auto}
+  .chip{
+    padding:6px 10px; border-radius:10px; background:#f3f4f6; color:#374151; font-size:12px
+  }
+
+  .mini-btn{
+    border:1px solid var(--line); background:#fff; height:36px; width:36px; border-radius:12px; display:grid; place-items:center;
+    cursor:pointer; transition:.15s transform, .15s background, .15s border-color;
+  }
+  .mini-btn:hover{transform:translateY(-1px)}
+  .mini-btn svg{width:18px;height:18px;stroke:#334155}
+  .mini-btn.danger{border-color:#fecdd3; background:#fff5f7}
+  .mini-btn.danger svg{stroke:var(--danger)}
+  .mini-btn.edit svg{stroke:#0ea5e9}
+
+  /* Fab */
+  .fab{
+    position:fixed; right:22px; bottom:22px; width:58px; height:58px; border:none; border-radius:999px; background:var(--primary);
+    color:#fff; font-size:28px; display:grid; place-items:center; cursor:pointer;
+    box-shadow:0 10px 30px rgba(52,120,246,.4); transition:.15s transform, .15s background;
+  }
+  .fab:hover{transform:translateY(-2px); background:var(--primary-700)}
+
+  /* Modal */
+  .modal-wrap{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(15,23,42,.35); z-index:20}
+  .modal{width:min(520px,calc(100vw - 24px)); background:#fff; border-radius:18px; padding:18px; box-shadow:var(--shadow); border:1px solid var(--line)}
+  .modal h3{margin:8px 6px 6px; font-size:22px}
+  .modal .row{display:flex; gap:10px; margin:10px 0}
+  .modal input[type="text"]{
+    width:100%; padding:12px 12px; border-radius:12px; border:1px solid var(--line); font-size:16px;
+  }
+  .colors{display:flex; gap:10px; flex-wrap:wrap; margin:8px 4px}
+  .colorPick{width:34px;height:34px;border-radius:999px;border:2px solid #fff;outline:2px solid var(--line);cursor:pointer}
+  .actions{display:flex; gap:10px; justify-content:flex-end; margin-top:14px}
+  .btn{border:none; border-radius:12px; padding:10px 14px; font-weight:700; cursor:pointer}
+  .btn.ghost{background:#f3f4f6}
+  .btn.primary{background:var(--primary); color:#fff}
+
+  /* Editor */
+  .editor-wrap{display:none}
+  .toolbar{
+    position:sticky; top:64px; z-index:5; background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
+    padding:8px; display:flex; gap:8px; align-items:center; margin:8px 0 14px;
+  }
+  .tool-btn{
+    border:1px solid var(--line); background:#fff; padding:8px 10px; border-radius:10px; cursor:pointer; font-weight:700;
+  }
+  .tool-btn:active{transform:translateY(1px)}
+  .tool-group{display:flex; gap:8px}
+  .tool-select, .tool-color{
+    border:1px solid var(--line); background:#fff; border-radius:10px; padding:8px 10px; font-size:14px;
+  }
+  .editor{
+    background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:18px;
+    min-height:55vh; line-height:1.6; outline:none;
+  }
+  .editor img{max-width:100%; border-radius:12px}
+  .muted{color:var(--muted)}
+  .hidden{display:none!important}
+</style>
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <div>
+        <div class="title" id="pageTitle">Le Mie Materie</div>
+        <div class="subtitle"><span class="dot"></span> <span id="spaceName">Spazio personale</span></div>
+      </div>
+      <div class="spacer"></div>
+      <!-- Settings (placeholder) -->
+      <button class="icon-btn" title="Impostazioni" id="btnSettings" aria-label="Impostazioni">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path d="M10.325 4.317a1 1 0 011.35-.436l1.618.81a1 1 0 00.894 0l1.618-.81a1 1 0 011.35.436l.81 1.618a1 1 0 000 .894l-.81 1.618a1 1 0 000 .894l.81 1.618a1 1 0 01-.436 1.35l-1.618.81a1 1 0 00-.894 0l-1.618.81a1 1 0 01-1.35-.436l-.81-1.618a1 1 0 00-.894 0l-1.618.81a1 1 0 01-1.35-.436l-.81-1.618a1 1 0 000-.894l.81-1.618a1 1 0 000-.894l-.81-1.618z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+      <!-- Pencil toggle -->
+      <button class="icon-btn pencil-toggle" title="Modalità gestione" id="btnManage" aria-label="Modalità gestione">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path d="M12 20h9"/>
+          <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <nav class="crumbs" id="breadcrumbs" aria-label="Percorso"></nav>
+
+    <section id="listsView">
+      <div class="list" id="listContainer"></div>
+    </section>
+
+    <section class="editor-wrap" id="editorView">
+      <div class="toolbar" role="toolbar" aria-label="Strumenti editor">
+        <div class="tool-group">
+          <button class="tool-btn" id="tbBold"><b>B</b></button>
+          <select class="tool-select" id="tbSize" title="Dimensione">
+            <option value="p">Normale</option>
+            <option value="h1">Titolo 1</option>
+            <option value="h2">Titolo 2</option>
+            <option value="h3">Titolo 3</option>
+          </select>
+          <input type="color" id="tbColor" class="tool-color" title="Colore testo" />
+          <label class="tool-btn" for="tbImg" title="Inserisci immagine">🖼</label>
+          <input type="file" id="tbImg" accept="image/*" class="hidden" />
+        </div>
+        <div class="spacer"></div>
+        <div class="tool-group">
+          <button class="tool-btn" id="tbUndo">↶</button>
+          <button class="tool-btn" id="tbRedo">↷</button>
+          <button class="tool-btn" id="tbSave">💾 Salva</button>
+        </div>
+      </div>
+      <div id="fileMeta" class="muted" style="margin:6px 2px 10px;"></div>
+      <div id="editor" class="editor" contenteditable="true" aria-label="Area appunti"></div>
+    </section>
+  </main>
+
+  <!-- Floating add -->
+  <button class="fab" id="fab" title="Aggiungi">+</button>
+
+  <!-- Modal create/edit -->
+  <div class="modal-wrap" id="modalWrap" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h3 id="modalTitle">Nuovo elemento</h3>
+      <div class="row">
+        <input id="modalName" type="text" placeholder="Nome..." />
+      </div>
+      <div class="row">
+        <div>
+          <div class="muted" style="margin:4px 6px;">Colore</div>
+          <div class="colors" id="colorChoices"></div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost" id="btnCancel">Annulla</button>
+        <button class="btn primary" id="btnConfirm">Conferma</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* ------------------ Stato & util ------------------ */
+const $ = (sel, el=document)=>el.querySelector(sel);
+const $$ = (sel, el=document)=>[...el.querySelectorAll(sel)];
+
+const state = {
+  level: 'materie',         // materie | argomenti | files | editor
+  materiaId: null,
+  argomentoId: null,
+  fileId: null,
+  manage: false,
+  data: load() || seed()
+};
+
+function seed(){
+  return { materie: [] };
+}
+function save(){ localStorage.setItem('scuola-data', JSON.stringify(state.data)); }
+function load(){ try{ return JSON.parse(localStorage.getItem('scuola-data')); }catch(e){ return null; } }
+function uid(){ return Math.random().toString(36).slice(2,9); }
+function now(){ return new Date().toLocaleString(); }
+
+const COLORS = ['#3b82f6','#ef4444','#10b981','#f59e0b','#8b5cf6','#ec4899','#06b6d4','#84cc16'];
+
+/* ------------------ Rendering ------------------ */
+const listContainer = $('#listContainer');
+const editorView = $('#editorView');
+const listsView = $('#listsView');
+const pageTitle = $('#pageTitle');
+const breadcrumbs = $('#breadcrumbs');
+const fileMeta = $('#fileMeta');
+const editor = $('#editor');
+
+function render(){
+  document.body.classList.toggle('manage', state.manage);
+  // Breadcrumbs
+  renderBreadcrumbs();
+
+  if(state.level === 'editor'){
+    listsView.style.display='none';
+    editorView.style.display='block';
+    const file = getCurrentFile();
+    pageTitle.textContent = file?.nome || 'Editor';
+    fileMeta.textContent = `Ultimo salvataggio: ${file?.lastSaved ? new Date(file.lastSaved).toLocaleString() : 'mai'}`;
+    editor.innerHTML = file?.contenuto || '';
+    return;
+  }
+
+  editorView.style.display='none';
+  listsView.style.display='block';
+
+  if(state.level==='materie'){
+    pageTitle.textContent = 'Le Mie Materie';
+    renderList(state.data.materie, 'materia');
+  }else if(state.level==='argomenti'){
+    const m = currentMateria();
+    pageTitle.textContent = m?.nome || 'Argomenti';
+    renderList(m?.argomenti||[], 'argomento');
+  }else if(state.level==='files'){
+    const a = currentArgomento();
+    pageTitle.textContent = a?.nome || 'Fogli';
+    renderList(a?.files||[], 'file');
+  }
+}
+
+function renderBreadcrumbs(){
+  const parts = [];
+  parts.push(`<a href="#" data-nav="materie">Materie</a>`);
+  if(state.level!=='materie' && state.materiaId){
+    const m = currentMateria(); 
+    parts.push(`› <a href="#" data-nav="argomenti">${escapeHtml(m?.nome||'')}</a>`);
+  }
+  if(state.level==='files' || state.level==='editor'){
+    const a = currentArgomento();
+    parts.push(`› <a href="#" data-nav="files">${escapeHtml(a?.nome||'')}</a>`);
+  }
+  if(state.level==='editor'){
+    const f = getCurrentFile();
+    parts.push(`› <span>${escapeHtml(f?.nome||'')}</span>`);
+  }
+  breadcrumbs.innerHTML = parts.join(' ');
+  // events
+  $$('a[data-nav]', breadcrumbs).forEach(a=>{
+    a.onclick = (e)=>{
+      e.preventDefault();
+      const go = a.getAttribute('data-nav');
+      if(go==='materie'){ state.level='materie'; state.materiaId=null; state.argomentoId=null; state.fileId=null; }
+      if(go==='argomenti'){ state.level='argomenti'; state.argomentoId=null; state.fileId=null; }
+      if(go==='files'){ state.level='files'; state.fileId=null; }
+      render();
+    };
+  });
+}
+
+function renderList(arr, type){
+  listContainer.innerHTML = '';
+  if(!arr || arr.length===0){
+    listContainer.innerHTML = `<div class="muted" style="padding:24px 6px;">Nessun elemento. Usa il pulsante <b>+</b> in basso a destra.</div>`;
+    return;
+  }
+
+  arr.forEach(obj=>{
+    const el = document.createElement('div');
+    el.className = 'item clickable';
+    el.innerHTML = `
+      <div class="left">
+        <span class="color-dot" style="background:${obj.colore||'#94a3b8'}"></span>
+        <div style="min-width:0">
+          <div class="name">${escapeHtml(obj.nome)}</div>
+          <div class="meta">${obj.createdAt ? ('Creato il ' + new Date(obj.createdAt).toLocaleDateString()) : ''}</div>
+        </div>
+      </div>
+      <div class="right">
+        <button class="mini-btn edit ghost" title="Modifica">
+          ${iconPencil()}
+        </button>
+        <button class="mini-btn danger ghost" title="Elimina">
+          ${iconTrash()}
+        </button>
+      </div>
+    `;
+    const go = ()=>{
+      if(type==='materia'){ state.level='argomenti'; state.materiaId=obj.id; }
+      else if(type==='argomento'){ state.level='files'; state.argomentoId=obj.id; }
+      else if(type==='file'){ state.level='editor'; state.fileId=obj.id; }
+      render();
+    };
+    el.querySelector('.left').onclick = go;
+
+    // Manage buttons
+    const btnEdit = el.querySelector('.edit');
+    const btnTrash = el.querySelector('.danger');
+    btnEdit.onclick = (e)=>{ e.stopPropagation(); openModal('edit', type, obj); };
+    btnTrash.onclick = (e)=>{ e.stopPropagation(); confirmDelete(type, obj.id); };
+
+    listContainer.appendChild(el);
+  });
+}
+
+/* ------------------ CRUD helpers ------------------ */
+function currentMateria(){ return state.data.materie.find(m=>m.id===state.materiaId); }
+function currentArgomento(){ return currentMateria()?.argomenti?.find(a=>a.id===state.argomentoId); }
+function getCurrentFile(){ return currentArgomento()?.files?.find(f=>f.id===state.fileId); }
+
+function addMateria({nome,colore}){
+  state.data.materie.push({id:uid(), nome, colore, createdAt:Date.now(), argomenti:[]});
+  save(); render();
+}
+function addArgomento({nome,colore}){
+  const m = currentMateria(); if(!m) return;
+  m.argomenti ??= [];
+  m.argomenti.push({id:uid(), nome, colore, createdAt:Date.now(), files:[]});
+  save(); render();
+}
+function addFile({nome,colore}){
+  const a = currentArgomento(); if(!a) return;
+  a.files ??= [];
+  a.files.push({id:uid(), nome, colore, createdAt:Date.now(), contenuto:"", lastSaved:null});
+  save(); render();
+}
+
+function updateObj(type, id, patch){
+  let obj=null;
+  if(type==='materia'){ obj = state.data.materie.find(x=>x.id===id); }
+  if(type==='argomento'){ obj = currentMateria()?.argomenti?.find(x=>x.id===id); }
+  if(type==='file'){ obj = currentArgomento()?.files?.find(x=>x.id===id); }
+  if(obj) Object.assign(obj, patch);
+  save(); render();
+}
+
+function confirmDelete(type, id){
+  let label = type==='materia'?'la materia': type==='argomento'?'l\'argomento':'il file';
+  if(confirm(`Sei sicuro di voler eliminare ${label}?`)){
+    if(type==='materia'){
+      state.data.materie = state.data.materie.filter(x=>x.id!==id);
+      if(state.materiaId===id){ state.level='materie'; state.materiaId=null; state.argomentoId=null; state.fileId=null; }
+    }else if(type==='argomento'){
+      const m = currentMateria();
+      m.argomenti = (m.argomenti||[]).filter(x=>x.id!==id);
+      if(state.argomentoId===id){ state.level='argomenti'; state.argomentoId=null; state.fileId=null; }
+    }else if(type==='file'){
+      const a = currentArgomento();
+      a.files = (a.files||[]).filter(x=>x.id!==id);
+      if(state.fileId===id){ state.level='files'; state.fileId=null; }
+    }
+    save(); render();
+  }
+}
+
+/* ------------------ Modal create/edit ------------------ */
+const modalWrap = $('#modalWrap');
+const modalTitle = $('#modalTitle');
+const modalName = $('#modalName');
+const colorChoices = $('#colorChoices');
+const btnCancel = $('#btnCancel');
+const btnConfirm = $('#btnConfirm');
+let modalCtx = null; // {mode:'create'|'edit', type:'materia'|'argomento'|'file', target?}
+
+function openModal(mode, type, target=null){
+  modalCtx = {mode, type, target};
+  modalTitle.textContent = (mode==='create'?'Nuovo ':'Modifica ') + labelFor(type);
+  modalName.value = target?.nome || '';
+  renderColorChoices(target?.colore || COLORS[0]);
+  modalWrap.style.display='flex';
+  setTimeout(()=>modalName.focus(), 0);
+}
+function closeModal(){ modalWrap.style.display='none'; }
+
+function renderColorChoices(selected){
+  colorChoices.innerHTML='';
+  COLORS.forEach(c=>{
+    const b = document.createElement('button');
+    b.type='button'; b.className='colorPick'; b.style.background=c;
+    if(c===selected) b.style.outline='3px solid '+c;
+    b.onclick = ()=>{
+      $$('.colorPick', colorChoices).forEach(x=>x.style.outline='2px solid var(--line)');
+      b.style.outline='3px solid '+c;
+      colorChoices.setAttribute('data-selected', c);
+    };
+    colorChoices.appendChild(b);
+  });
+  colorChoices.setAttribute('data-selected', selected);
+}
+
+btnCancel.onclick = closeModal;
+btnConfirm.onclick = ()=>{
+  const nome = modalName.value.trim();
+  const colore = colorChoices.getAttribute('data-selected') || COLORS[0];
+  if(!nome){ alert('Inserisci un nome'); return; }
+
+  if(modalCtx.mode==='create'){
+    if(modalCtx.type==='materia') addMateria({nome,colore});
+    if(modalCtx.type==='argomento') addArgomento({nome,colore});
+    if(modalCtx.type==='file') addFile({nome,colore});
+  }else{
+    updateObj(modalCtx.type, modalCtx.target.id, {nome, colore});
+  }
+  closeModal();
+}
+
+/* ------------------ Header actions ------------------ */
+$('#btnManage').onclick = ()=>{
+  state.manage = !state.manage;
+  $('#btnManage').classList.toggle('active', state.manage);
+  render();
+};
+
+$('#fab').onclick = ()=>{
+  const map = {materie:'materia', argomenti:'argomento', files:'file'};
+  openModal('create', map[state.level]);
+};
+
+/* ------------------ Editor ------------------ */
+$('#tbBold').onclick = ()=> document.execCommand('bold');
+$('#tbUndo').onclick = ()=> document.execCommand('undo');
+$('#tbRedo').onclick = ()=> document.execCommand('redo');
+$('#tbColor').oninput = (e)=> document.execCommand('foreColor', false, e.target.value);
+$('#tbSize').onchange = (e)=>{
+  const v = e.target.value;
+  if(v==='p'){ document.execCommand('formatBlock', false, 'p'); }
+  else document.execCommand('formatBlock', false, v);
+};
+
+$('#tbImg').addEventListener('change', (e)=>{
+  const file = e.target.files?.[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    const img = document.createElement('img');
+    img.src = reader.result;
+    const range = window.getSelection().getRangeAt(0);
+    range.insertNode(img);
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+});
+
+$('#tbSave').onclick = ()=>{
+  const f = getCurrentFile();
+  if(!f) return;
+  f.contenuto = editor.innerHTML;
+  f.lastSaved = Date.now();
+  save();
+  fileMeta.textContent = 'Ultimo salvataggio: ' + new Date(f.lastSaved).toLocaleString();
+  flash('Salvato!');
+};
+
+function flash(text){
+  const t = document.createElement('div');
+  t.textContent = text;
+  Object.assign(t.style,{
+    position:'fixed', left:'50%', bottom:'22px', transform:'translateX(-50%)',
+    background:'#111827', color:'#fff', padding:'10px 14px', borderRadius:'12px',
+    boxShadow:'0 10px 30px rgba(0,0,0,.2)', zIndex:50
+  });
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 1200);
+}
+
+/* ------------------ Navigation from breadcrumbs items ------------------ */
+breadcrumbs.addEventListener('click', (e)=>{
+  const a = e.target.closest('a[data-nav]');
+  if(a){ e.preventDefault(); }
+});
+
+/* ------------------ Utilities ------------------ */
+function escapeHtml(s=''){ return s.replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
+function labelFor(type){ return type==='materia'?'materia' : type==='argomento'?'argomento' : 'file'; }
+function iconTrash(){
+  return `<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 6h18"/><path d="M8 6v14a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6"/><path d="M10 10v8M14 10v8"/><path d="M9 6l1-2h4l1 2"/></svg>`;
+}
+function iconPencil(){
+  return `<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>`;
+}
+
+/* ------------------ Boot ------------------ */
+render();
+
+/* Close modal on backdrop click & Escape */
+modalWrap.addEventListener('click', (e)=>{ if(e.target===modalWrap) closeModal(); });
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+</script>
+</body>
+</html>

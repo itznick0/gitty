@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Documento Personalizzato</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+      color: #2c3e50;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 30px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      padding: 50px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #1a202c;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .date, .subject {
+      font-size: 1.1rem;
+      color: #4a5568;
+      background: #f0f4f8;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    /* Stili per i paragrafi personalizzati */
+    .content p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    /* Classi di stile */
+    .grassetto { font-weight: bold !important; }
+    .corsivo { font-style: italic !important; }
+    .sottolineato { text-decoration: underline !important; }
+    .barrato { text-decoration: line-through !important; }
+    .evidenziato { background-color: #fff9c4; padding: 2px 4px; border-radius: 3px; }
+    .grande { font-size: 1.4rem !important; line-height: 1.6; }
+    .piccolo { font-size: 0.9rem !important; line-height: 1.6; }
+
+    /* Sezione immagini */
+    .images-section {
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid #edf2f7;
+    }
+
+    .images-section h2 {
+      font-size: 1.4rem;
+      color: #2d3748;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .images-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .images-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    h1::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(to right, #4f6df5, #7a5ef8);
+      margin: 16px auto 0;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 30px 20px; }
+      h1 { font-size: 2.2rem; }
+      .meta { flex-direction: column; gap: 10px; }
+      .images-container { flex-direction: column; align-items: center; }
+    }
+
+    #allinea p {
+        text-align: center;
+        margin: 8px 0;
+    }
+
+  /* 🔥 TITOLO APPARISCENTE */
+  #titoloparagrafo {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin: 30px 0 24px 0;
+    color: #0d3b66;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    letter-spacing: 0.5px;
+    position: relative;
+  }
+
+  /* Decorazione sotto il titolo */
+  #titoloparagrafo::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, #4a6fa5, #6b8cbc);
+    margin: 14px auto 0;
+    border-radius: 2px;
+  }
+
+  /* Responsive: su mobile il titolo si adatta */
+  @media (max-width: 600px) {
+    #titoloparagrafo {
+      font-size: 1.5rem;
+      margin: 24px 0 20px 0;
+    }
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Ludovico Ariosto</h1>
+      <div class="meta">
+        <p class="date">15 Ottobre 2025</p>
+        <p class="subject">Materia: Letteratura</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- grassetto, corsivo, sottolineato, titoloparagrafo, grande, piccolo, evidenziato, barrato, misto senza spazi + div id="allinea"-->
+       <p id="titoloparagrafo">Inizio</p>
+       <div id="allinea">
+        <p>J.L.BORGES: “ALTRA POESIA DEI DONI”</p>
+<p>Ringraziare desidero il divino</p>
+<p>labirinto delle cause e degli effetti</p>
+<p>per la diversità delle creature</p>
+<p>che compongono questo universo singolare,</p>
+<p>per la ragione, che non cesserà di sognare</p>
+<p>un qualche disegno del labirinto,</p>
+<p>per il viso di Elena e la perseveranza di Ulisse,</p>
+<p>per l’amore, che ci fa vedere gli altri</p>
+<p>come li vede la divinità,</p>
+<p>per il saldo diamante e l’acqua sciolta</p>
+<p>per l’algebra, palazzo di precisi cristalli,</p>
+<p>per le mistiche monete di Angelus Silesius,</p>
+<p>per Schopenhauer,</p>
+<p>che forse decifrò l’universo,</p>
+<p>per lo splendore del fuoco</p>
+<p>che nessun essere umano può guardare</p>
+<p>senza uno stupore antico</p>
+<p>per il mogano, il sandalo e il cedro,</p>
+<p>per il pane e il sale,</p>
+<p>per il mistero della rosa</p>
+<p>che prodiga colore e non lo vede,</p>
+<p>per certe vigilie e giorni del 1955,</p>
+<p>per i duri mandriani che nella pianura</p>
+<p>aizzano le bestie e l’alba,</p>
+<p>per il mattino a Montevideo,</p>
+<p>per l’arte dell’amicizia,</p>
+<p>per l’ultima giornata di Socrate,</p>
+<p>per le parole che in un crepuscolo furono dette</p>
+<p>da una croce all’altra,</p>
+<p>per quel sogno dell’Islam che abbracciò</p>
+<p>mille notti e una notte,</p>
+<p>per quell’altro sogno dell’inferno,</p>
+<p>della torre del fuoco che purifica,</p>
+<p>e delle sfere gloriose,</p>
+<p>per Swedenborg,</p>
+<p>che conversava con gli angeli per le strade di Londra,</p>
+<p>per i fiumi segreti e immemorabili</p>
+<p>che convergono in me,</p>
+<p>per la lingua che secoli fa parlai nella Northumbria,</p>
+<p>per la spada e l’arpa dei sassoni,</p>
+<p>per il mare, che è un deserto risplendente</p>
+<p>e una cifra di cose che non sappiamo,</p>
+<p>per la musica verbale d’Inghilterra,</p>
+<p>per la musica verbale della Germania,</p>
+<p>per l’oro che sfolgora nei versi,</p>
+<p>per l’epico inverno</p>
+<p>per il nome di un libro che non ho letto,</p>
+<p>per Verlaine, innocente come gli uccelli,</p>
+<p>per il prisma di cristallo e il peso d’ottone,</p>
+<p>per le strisce della tigre,</p>
+<p>per le alte torri di San Francisco e di Manhattan,</p>
+<p>per il mattino nel Texas,</p>
+<p>per quel sivigliano che stese l’Epistola Morale,</p>
+<p>e il cui nome, come preferiva, ignoriamo,</p>
+<p>per Seneca e Lucano, di Cordova,</p>
+<p>che prima dello spagnolo</p>
+<p>scrissero tutta la letteratura spagnola,</p>
+<p>per il geometrico e bizzarro gioco degli scacchi,</p>
+<p>per la tartaruga di Zenone e la mappa di Royce,</p>
+<p>per l’odore medicinale degli eucalipti,</p>
+<p>per il linguaggio, che può simulare la sapienza,</p>
+<p>per l’oblio, che annulla o modifica i passati,</p>
+<p>per la consuetudine,</p>
+<p>che ci ripete e ci conferma come uno specchio,</p>
+<p>per il mattino, che ci procura l’illusione di un principio,</p>
+<p>per la notte, le sue tenebre e la sua astronomia,</p>
+<p>per il coraggio e la felicità degli altri,</p>
+<p>per la patria, sentita nei gelsomini</p>
+<p>o in una vecchia spada,</p>
+<p>per Whitman e Francesco d’Assisi che scrissero già</p>
+<p>questa poesia,</p>
+<p>per il fatto che questa poesia è inesauribile</p>
+<p>e si confonde con la somma delle creature</p>
+<p>e non arriverà mai all’ultimo verso</p>
+<p>e cambia secondo gli uomini,</p>
+<p>per Frances Haslam, che chiese perdono ai suoi figli</p>
+<p>perché moriva così lentamente,</p>
+<p>per i minuti che precedono il sonno,</p>
+<p>per il sonno e la morte,</p>
+<p>quei due tesori occulti,</p>
+<p>per gli intimi doni che non elenco,</p>
+<p>per questa musica, misteriosa forma del tempo.</p>
+       </div>
+       <p id="titoloparagrafo">Orlando Furioso-Es. p. 170/171</p>
+       <p class="grassetto">Quali sono i 2 temi principali?</p>
+       <p>Amore e Cavalleria</p>
+       <p class="grassetto">Attraverso quali parole vengono indicati questi 2 motivi presenti nell'opera? Osservando la disposizione di questi vocaboli, quale figura retorica si può riconoscere? Quale funzione riveste questa scelta stilistica? Qual è il "precedente" fondamentale a cui si rifà Ariosto nel ricreare fusione tra queste due tematiche?</p>
+        <p> - Parola Amore: le donne, gli amori e le cortesie.</p>
+        <p> - Parole Cavalleria: i cavallier, l'arme e l'audaci imprese.</p>
+        <p> - Figura retorica: Chiasmo.</p>
+        <p> - Funzione: Tenere unite le parti dell'intreccio.</p>
+        <p> - Precedente fondamentale: Matteo Maria Boiardo.</p>
+        <p class="grassetto">In quale contesto storico-letterario si colloca l'Orlando Furioso? Quali sono le caratteristiche principali di questo periodo che si riflettono nell'opera?</p>
+        <p> - Pazzia nelle prime due ottave: annunciata come “furor” causato dall’amore di Orlando per Angelica.</p>
+        <p> - Significato: rovesciamento dell’eroe cavalleresco, simbolo del trionfo della passione sulla ragione.</p>
+        <p> - Seconda ottava: Ariosto paragona la sua fatica poetica alla follia di Orlando, presentando la scrittura come impresa quasi impossibile, ma non amorosa.</p>
+    </div>
+
+    <!-- Sezione immagini -->
+    <div class="images-section">
+      <h2>Immagini</h2>
+      <div class="images-container">
+        <!-- Aggiungi qui le tue immagini -->
+        <!-- <img src="immagine.jpg" alt="Descrizione"> -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    console.log("Documento con stili personalizzati caricato!");
+  </script>
+</body>
+</html>
